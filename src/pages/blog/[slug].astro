@@ -1,0 +1,54 @@
+---
+/** Шаблон статті — генерується для кожного файлу з content/blog/ */
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { useTranslations } from '@/i18n/ui';
+import { localizedPath } from '@/i18n/routes';
+import { formatDate, l } from '@/lib/text';
+import { getPosts, type Post } from '@/lib/content';
+import PageHeader from '@/components/PageHeader.astro';
+import CtaBanner from '@/components/CtaBanner.astro';
+
+export async function getStaticPaths() {
+  return (await getPosts()).map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+interface Props { post: Post }
+const { post } = Astro.props;
+const lang = 'uk' as const;
+const t = useTranslations(lang);
+const { Content } = await render(post);
+const direction = post.data.direction ? await getEntry(post.data.direction) : undefined;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.date.toISOString(),
+  author: { '@type': 'Person', name: post.data.author },
+  inLanguage: 'uk',
+};
+---
+<BaseLayout title={post.data.title} description={post.data.description} lang={lang} ogType="article">
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <PageHeader
+    lang={lang}
+    title={post.data.title}
+    lead={post.data.description}
+    crumbs={[{ label: t('blog.title'), href: localizedPath(lang, '/blog/') }, { label: post.data.title }]}
+  >
+    <p class="mt-6 text-sm text-muted">
+      {post.data.author} · <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date, lang)}</time>
+      {post.data.readingTime && <> · {t('blog.readingTime')}: {post.data.readingTime}</>}
+    </p>
+  </PageHeader>
+  <article class="section pt-10">
+    <div class="container-page max-w-3xl">
+      <div class="prose-school"><Content /></div>
+      <div class="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-slate-200 pt-6">
+        <a href={localizedPath(lang, '/blog/')} class="btn-ghost px-0 underline">← {t('blog.back')}</a>
+        {direction && <a href={localizedPath(lang, `/directions/${direction.id}/`)} class="btn-secondary">{t('blog.related')}: {l(direction.data.title, lang)}</a>}
+      </div>
+    </div>
+  </article>
+  <CtaBanner lang={lang} direction={direction?.id} />
+</BaseLayout>

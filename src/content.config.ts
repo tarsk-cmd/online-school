@@ -9,9 +9,7 @@ import { z } from 'astro/zod';
 
 const localized = z.object({ uk: z.string(), en: z.string().optional(), pl: z.string().optional() });
 
-export const AGE_GROUPS = ['6-8', '9-11', '12-14', '15-17'] as const;
-export const FORMATS = ['group', 'individual'] as const;
-export const LEVELS = ['zero', 'continue'] as const;
+import { AGE_GROUPS, FORMATS, LEVELS } from './lib/taxonomy';
 
 const directions = defineCollection({
   loader: glob({ pattern: '*.json', base: './content/directions' }),

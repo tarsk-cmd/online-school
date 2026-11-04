@@ -1,0 +1,19 @@
+---
+// Заглушка для сторінок, ще не перекладених англійською/польською.
+// TODO: перекласти сторінку й замінити заглушку на повноцінну view.
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { useTranslations, type Lang } from '@/i18n/ui';
+import { localizedPath } from '@/i18n/routes';
+import PageHeader from '@/components/PageHeader.astro';
+import CtaBanner from '@/components/CtaBanner.astro';
+
+interface Props { lang: Lang; path: string; title: string }
+const { lang, path, title } = Astro.props;
+const t = useTranslations(lang);
+---
+<BaseLayout title={title} description={t('todo.lead')} lang={lang} noindex>
+  <PageHeader lang={lang} title={title} lead={t('todo.lead')} eyebrow={t('todo.title')} crumbs={[{ label: title }]}>
+    <a href={localizedPath('uk', path)} hreflang="uk" class="btn-primary mt-8">{t('todo.goUk')}</a>
+  </PageHeader>
+  <CtaBanner lang={lang} />
+</BaseLayout>

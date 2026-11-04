@@ -1,0 +1,182 @@
+---
+/** Сторінка курсу — генерується автоматично для кожного файлу з content/courses/ */
+import { getEntries, getEntry, render } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { useTranslations } from '@/i18n/ui';
+import { localizedPath } from '@/i18n/routes';
+import { DIRECTION_THEME, l } from '@/lib/text';
+import { getCourses, type Course } from '@/lib/content';
+import PageHeader from '@/components/PageHeader.astro';
+import TeacherCard from '@/components/TeacherCard.astro';
+import FaqList from '@/components/FaqList.astro';
+import CourseCard from '@/components/CourseCard.astro';
+import CtaBanner from '@/components/CtaBanner.astro';
+import Icon from '@/components/Icon.astro';
+
+export async function getStaticPaths() {
+  const courses = await getCourses();
+  return courses.map((course) => ({ params: { slug: course.id }, props: { course } }));
+}
+
+interface Props { course: Course }
+const { course } = Astro.props;
+const lang = 'uk' as const;
+const t = useTranslations(lang);
+const c = course.data;
+const direction = (await getEntry(c.direction))!;
+const theme = DIRECTION_THEME[direction.data.color];
+const teachers = await getEntries(c.teachers);
+const { Content } = await render(course);
+const related = (await getCourses()).filter((x) => x.data.direction.id === direction.id && x.id !== course.id);
+const signupHref = localizedPath(lang, `/contacts/?direction=${direction.id}#signup`);
+
+const details = [
+  { icon: 'user', label: t('course.age'), value: c.ageLabel },
+  { icon: 'users', label: t('course.format'), value: c.formats.map((f) => t(`format.${f}`)).join(' / ') + (c.groupSize ? ` · ${c.groupSize}` : '') },
+  { icon: 'clock', label: t('course.lesson'), value: c.lessonDuration },
+  { icon: 'calendar', label: t('course.duration'), value: c.courseDuration },
+];
+---
+<BaseLayout title={c.title} description={c.summary} lang={lang}>
+  <PageHeader
+    lang={lang}
+    title={c.title}
+    lead={c.summary}
+    eyebrow={l(direction.data.title, lang)}
+    crumbs={[
+      { label: t('catalog.title'), href: localizedPath(lang, '/courses/') },
+      { label: l(direction.data.title, lang), href: localizedPath(lang, `/directions/${direction.id}/`) },
+      { label: c.title },
+    ]}
+  >
+    <ul class="mt-6 flex flex-wrap gap-2">
+      {c.levels.map((lv) => <li class="chip bg-sun-200 text-ink">{t(`level.${lv}`)}</li>)}
+      {c.formats.map((f) => <li class="chip bg-white">{t(`format.${f}`)}</li>)}
+      <li class="chip bg-white">{c.ageLabel}</li>
+    </ul>
+    <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+      <a href={signupHref} class="btn-primary">{t('cta.trial')}</a>
+      <a href="#program" class="btn-secondary">{t('course.program')}</a>
+    </div>
+  </PageHeader>
+
+  <div class="container-page grid gap-10 py-12 lg:grid-cols-[1fr_340px] lg:py-16">
+    <div class="min-w-0 space-y-14">
+      <section aria-labelledby="for">
+        <h2 id="for" class="h2">{t('course.for')}</h2>
+        <div class="prose-school mt-5"><Content /></div>
+      </section>
+
+      <section aria-labelledby="outcomes">
+        <h2 id="outcomes" class="h2">{t('course.outcomes')}</h2>
+        <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+          {c.outcomes.map((o) => (
+            <li class="flex gap-3 rounded-2xl border border-slate-200 bg-white p-4">
+              <span class="grid size-7 shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-800"><Icon name="check" class="size-4" /></span>
+              <span>{o}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section aria-labelledby="program">
+        <h2 id="program" class="h2">{t('course.program')}</h2>
+        <ol class="mt-6 space-y-4">
+          {c.modules.map((m, i) => (
+            <li>
+              <details class="group card overflow-hidden" open={i === 0}>
+                <summary class="flex min-h-16 cursor-pointer list-none items-center gap-4 p-5 hover:bg-brand-50 [&::-webkit-details-marker]:hidden">
+                  <span class:list={['font-display grid size-10 shrink-0 place-items-center rounded-xl text-lg font-bold', theme.icon]} aria-hidden="true">{i + 1}</span>
+                  <span class="grow">
+                    <span class="block font-display text-lg font-semibold text-brand-950">{m.title}</span>
+                    {m.lessons && <span class="block text-sm text-muted">{m.lessons}</span>}
+                  </span>
+                  <Icon name="arrow" class="size-5 shrink-0 rotate-90 text-brand-700 transition-transform group-open:-rotate-90" />
+                </summary>
+                <ul class="space-y-2 border-t border-slate-200 px-5 py-4">
+                  {m.topics.map((topic) => <li class="flex gap-3"><span class="mt-2.5 size-1.5 shrink-0 rounded-full bg-accent-500" aria-hidden="true"></span>{topic}</li>)}
+                </ul>
+              </details>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      {c.homework && (
+        <section aria-labelledby="homework" class="rounded-2xl bg-sun-200/50 p-6 sm:p-8">
+          <h2 id="homework" class="text-2xl font-bold">{t('course.homework')}</h2>
+          <p class="mt-3 leading-relaxed">{c.homework}</p>
+        </section>
+      )}
+
+      {c.scheduleExample.length > 0 && (
+        <section aria-labelledby="schedule">
+          <h2 id="schedule" class="h2">{t('course.schedule')}</h2>
+          <ul class="mt-6 grid gap-3">
+            {c.scheduleExample.map((s) => <li class="flex gap-3 rounded-2xl border border-slate-200 bg-white p-4"><Icon name="calendar" class="size-5 shrink-0 text-brand-700" />{s}</li>)}
+          </ul>
+          <p class="mt-3 text-sm text-muted">Розклад орієнтовний, за київським часом. Актуальні групи уточнюйте при записі.</p>
+        </section>
+      )}
+
+      {teachers.length > 0 && (
+        <section aria-labelledby="teachers">
+          <h2 id="teachers" class="h2">{t('course.teachers')}</h2>
+          <ul class="mt-6 grid gap-5 sm:grid-cols-2">
+            {teachers.map((tc) => <li><TeacherCard teacher={tc} lang={lang} /></li>)}
+          </ul>
+        </section>
+      )}
+
+      {c.faq.length > 0 && (
+        <section aria-labelledby="course-faq">
+          <h2 id="course-faq" class="h2">{t('course.faq')}</h2>
+          <div class="mt-6"><FaqList items={c.faq} /></div>
+        </section>
+      )}
+    </div>
+
+    <!-- Бокова панель з ключовими деталями -->
+    <aside class="lg:sticky lg:top-20 lg:self-start" aria-labelledby="details-title">
+      <div class="card p-6">
+        <h2 id="details-title" class="text-xl font-bold">{t('course.details')}</h2>
+        <dl class="mt-5 space-y-4">
+          {details.map((d) => (
+            <div class="flex gap-3">
+              <Icon name={d.icon} class="mt-0.5 size-5 shrink-0 text-brand-700" />
+              <div><dt class="text-sm font-semibold text-muted">{d.label}</dt><dd>{d.value}</dd></div>
+            </div>
+          ))}
+          {c.tools.length > 0 && (
+            <div class="flex gap-3">
+              <Icon name="laptop" class="mt-0.5 size-5 shrink-0 text-brand-700" />
+              <div><dt class="text-sm font-semibold text-muted">{t('course.tools')}</dt><dd>{c.tools.join(', ')}</dd></div>
+            </div>
+          )}
+        </dl>
+        <div class="mt-6 rounded-xl bg-brand-50 p-4">
+          <p class="text-sm font-semibold text-brand-800">{t('course.price')}</p>
+          <dl class="mt-2 space-y-1">
+            {c.price.group && <div class="flex justify-between gap-3"><dt>{t('course.priceGroup')}</dt><dd class="text-right font-bold">{c.price.group}</dd></div>}
+            {c.price.individual && <div class="flex justify-between gap-3"><dt>{t('course.priceIndividual')}</dt><dd class="text-right font-bold">{c.price.individual}</dd></div>}
+          </dl>
+          <a href={localizedPath(lang, '/pricing/')} class="mt-2 inline-block text-sm font-medium text-brand-700 underline">Абонементи й знижки</a>
+        </div>
+        <a href={signupHref} class="btn-primary mt-6 w-full">{t('cta.signup')}</a>
+      </div>
+    </aside>
+  </div>
+
+  {related.length > 0 && (
+    <section class="section bg-white" aria-labelledby="related">
+      <div class="container-page">
+        <h2 id="related" class="h2">Інші курси напряму</h2>
+        <ul class="mt-6 grid gap-5 md:grid-cols-2">
+          {related.map((r) => <li><CourseCard course={r} direction={direction} lang={lang} /></li>)}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <CtaBanner lang={lang} title={t('course.signupTitle')} direction={direction.id} />
+</BaseLayout>

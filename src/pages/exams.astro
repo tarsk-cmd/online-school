@@ -1,0 +1,90 @@
+---
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { localizedPath } from '@/i18n/routes';
+import { getCourses, getTeachers } from '@/lib/content';
+import CourseCard from '@/components/CourseCard.astro';
+import TeacherCard from '@/components/TeacherCard.astro';
+import LeadForm from '@/components/LeadForm.astro';
+import Icon from '@/components/Icon.astro';
+
+const page = (await getEntry('pages', 'exams'))!;
+const { Content } = await render(page);
+const direction = (await getEntry('directions', 'exams'))!;
+const courses = (await getCourses()).filter((c) => c.data.direction.id === 'exams');
+const teachers = (await getTeachers()).filter((t) => t.data.directions.some((d) => d.id === 'exams'));
+const exams = [
+  { name: 'НМТ', text: 'Математика, українська мова, англійська — для вступу до українських університетів.' },
+  { name: 'Cambridge English', text: 'B1 Preliminary, B2 First, C1 Advanced — безстрокові сертифікати рівня мови.' },
+  { name: 'IELTS', text: 'Academic і General Training — для вступу та навчання за кордоном.' },
+  { name: 'TOEFL iBT', text: 'Для вступу до університетів, переважно в США та Канаді.' },
+  { name: 'DELE', text: 'Офіційний сертифікат з іспанської мови Інституту Сервантеса.' },
+  { name: 'Польська мова', text: 'Державний сертифікат з польської як іноземної — для навчання та життя в Польщі.' },
+];
+---
+<BaseLayout title={page.data.title} description={page.data.description} lang="uk">
+  <section class="relative overflow-hidden bg-brand-950 text-white">
+    <div class="container-page grid gap-10 py-14 sm:py-20 lg:grid-cols-[1.2fr_1fr] lg:items-center">
+      <div>
+        <nav aria-label="Навігаційний ланцюжок" class="text-sm text-brand-200">
+          <a href={localizedPath('uk', '/')} class="hover:text-white hover:underline">Головна</a> <span aria-hidden="true">/</span> <span aria-current="page">Іспити</span>
+        </nav>
+        <p class="mt-6 text-sm font-semibold tracking-wide text-sun-400 uppercase">Для старшокласників 14–17 років і батьків</p>
+        <h1 class="mt-2 text-4xl font-bold text-white sm:text-5xl">{page.data.title}</h1>
+        <p class="mt-5 text-lg text-brand-100">{direction.data.description}</p>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a href="#exam-signup" class="btn bg-sun-400 text-ink hover:bg-sun-200">Безкоштовна діагностика</a>
+          <a href="#exam-courses" class="btn border-2 border-white/40 text-white hover:bg-white/10">Програми підготовки</a>
+        </div>
+      </div>
+      <ul class="grid grid-cols-2 gap-3" aria-label="Іспити, до яких готуємо">
+        {exams.map((e) => <li class="rounded-2xl bg-white/10 p-4 ring-1 ring-white/15"><span class="font-display text-lg font-bold text-white">{e.name}</span></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="which">
+    <div class="container-page">
+      <h2 id="which" class="h2">До яких іспитів готуємо</h2>
+      <ul class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {exams.map((e) => (
+          <li class="card p-6">
+            <span class="grid size-12 place-items-center rounded-2xl bg-amber-500 text-ink"><Icon name="exams" /></span>
+            <h3 class="mt-4 text-xl font-bold">{e.name}</h3>
+            <p class="mt-2 text-muted">{e.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section bg-white">
+    <div class="container-page max-w-4xl prose-school"><Content /></div>
+  </section>
+
+  <section class="section" aria-labelledby="exam-courses">
+    <div class="container-page">
+      <h2 id="exam-courses" class="h2">Програми підготовки</h2>
+      <ul class="mt-6 grid gap-5 md:grid-cols-2">
+        {courses.map((c) => <li><CourseCard course={c} direction={direction} lang="uk" /></li>)}
+      </ul>
+    </div>
+  </section>
+
+  {teachers.length > 0 && (
+    <section class="section bg-white" aria-labelledby="exam-teachers">
+      <div class="container-page">
+        <h2 id="exam-teachers" class="h2">Викладачі</h2>
+        <ul class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {teachers.map((t) => <li><TeacherCard teacher={t} lang="uk" compact /></li>)}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <section class="section">
+    <div class="container-page max-w-3xl">
+      <LeadForm lang="uk" defaultDirection="exams" id="exam-signup" title="Запис на безкоштовну діагностику" />
+    </div>
+  </section>
+</BaseLayout>

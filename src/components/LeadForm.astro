@@ -1,0 +1,166 @@
+---
+/**
+ * Форма запису на пробний урок. Куди надсилати — задається в content/site.json → form.
+ */
+import { useTranslations, type Lang } from '@/i18n/ui';
+import { localizedPath } from '@/i18n/routes';
+import { site, isFilled } from '@/lib/site';
+import { l } from '@/lib/text';
+import { getDirections } from '@/lib/content';
+import MessengerButtons from './MessengerButtons.astro';
+
+interface Props { lang: Lang; defaultDirection?: string; id?: string; title?: string }
+const { lang, defaultDirection = '', id = 'signup', title } = Astro.props;
+const t = useTranslations(lang);
+const directions = await getDirections();
+const ages = Array.from({ length: 12 }, (_, i) => i + 6);
+const endpoint = site.form.endpoint;
+const configured = isFilled(endpoint);
+const mode = site.form.mode;
+const googleUrl = site.form.googleFormUrl;
+const messengers = [
+  { value: 'Telegram', label: 'Telegram' },
+  { value: 'Viber', label: 'Viber' },
+  { value: 'WhatsApp', label: 'WhatsApp' },
+  { value: 'Phone', label: t('form.messengerCall') },
+];
+const input =
+  'mt-1.5 block min-h-12 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-ink placeholder:text-slate-500 focus:border-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-600/30';
+const labelCls = 'block font-semibold text-brand-950';
+---
+<div class="card p-5 sm:p-8" id={id}>
+  <h2 class="text-2xl font-bold sm:text-3xl">{title ?? t('form.title')}</h2>
+
+  {mode === 'google' && isFilled(googleUrl) ? (
+    <div class="mt-4">
+      <p class="text-muted">{t('form.googleLead')}</p>
+      <a href={googleUrl} target="_blank" rel="noopener noreferrer" class="btn-primary mt-5">
+        {t('form.googleButton')} <span class="sr-only">{t('a11y.newWindow')}</span>
+      </a>
+    </div>
+  ) : (
+    <form
+      class="mt-6 grid gap-5"
+      action={configured ? endpoint : undefined}
+      method="POST"
+      data-lead-form
+      data-configured={configured ? 'true' : 'false'}
+      data-msg-sending={t('form.sending')}
+      data-msg-success={t('form.success')}
+      data-msg-error={t('form.error')}
+      data-msg-not-configured={t('form.notConfigured')}
+    >
+      <input type="hidden" name="_subject" value={`Заявка на пробний урок — ${l(site.name, 'uk')}`} />
+      <input type="hidden" name="language" value={lang} />
+      <input type="hidden" name="page" value="" data-page-field />
+      <p class="hidden" aria-hidden="true"><label>Не заповнюйте це поле <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label></p>
+
+      <div class="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label for={`${id}-name`} class={labelCls}>{t('form.parentName')} <span class="text-accent-600" aria-hidden="true">*</span></label>
+          <input id={`${id}-name`} name="parent_name" type="text" required autocomplete="name" class={input} />
+        </div>
+        <div>
+          <label for={`${id}-age`} class={labelCls}>{t('form.childAge')} <span class="text-accent-600" aria-hidden="true">*</span></label>
+          <select id={`${id}-age`} name="child_age" required class={input}>
+            <option value="">—</option>
+            {ages.map((a) => <option value={String(a)}>{a}</option>)}
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <label for={`${id}-direction`} class={labelCls}>{t('form.direction')}</label>
+        <select id={`${id}-direction`} name="direction" class={input} data-direction-select>
+          <option value="not-sure">{t('form.directionAny')}</option>
+          {directions.map((d) => <option value={d.id} selected={d.id === defaultDirection}>{l(d.data.title, lang)}</option>)}
+        </select>
+      </div>
+
+      <fieldset>
+        <legend class={labelCls}>{t('form.messenger')}</legend>
+        <div class="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-4">
+          {messengers.map((m, i) => (
+            <label class="flex min-h-12 cursor-pointer items-center gap-2 rounded-xl border border-slate-300 bg-white px-3 has-[:checked]:border-brand-600 has-[:checked]:bg-brand-50 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-brand-600">
+              <input type="radio" name="messenger" value={m.value} checked={i === 0} class="size-4 accent-brand-700" />
+              <span>{m.label}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <div>
+        <label for={`${id}-phone`} class={labelCls}>{t('form.phone')} <span class="text-accent-600" aria-hidden="true">*</span></label>
+        <input id={`${id}-phone`} name="phone" type="tel" required autocomplete="tel" inputmode="tel" pattern="[+0-9()\-\s]{9,20}" aria-describedby={`${id}-phone-hint`} class={input} />
+        <p id={`${id}-phone-hint`} class="mt-1.5 text-sm text-muted">{t('form.phoneHint')}</p>
+      </div>
+
+      <div>
+        <label for={`${id}-comment`} class={labelCls}>{t('form.comment')}</label>
+        <textarea id={`${id}-comment`} name="comment" rows="4" aria-describedby={`${id}-comment-hint`} class={input}></textarea>
+        <p id={`${id}-comment-hint`} class="mt-1.5 text-sm text-muted">{t('form.commentHint')}</p>
+      </div>
+
+      <label class="flex items-start gap-3">
+        <input type="checkbox" name="consent" value="yes" required class="mt-1 size-5 shrink-0 accent-brand-700" />
+        <span>{t('form.consent')} <a href={localizedPath(lang, '/privacy/')} class="font-medium text-brand-700 underline">{t('form.consentLink')}</a> <span class="text-accent-600" aria-hidden="true">*</span></span>
+      </label>
+
+      <p class="text-sm text-muted"><span class="text-accent-600" aria-hidden="true">*</span> — {t('form.required')}</p>
+
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+        <button type="submit" class="btn-primary w-full sm:w-auto" data-submit>{t('form.submit')}</button>
+      </div>
+      <div role="status" aria-live="polite" class="empty:hidden rounded-xl px-4 py-3 font-medium" data-form-status></div>
+    </form>
+  )}
+
+  <div class="mt-8 border-t border-slate-200 pt-6">
+    <p class="font-semibold text-brand-950">{t('form.orMessenger')}</p>
+    <MessengerButtons lang={lang} class="mt-3" />
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('[data-lead-form]').forEach((form) => {
+    const status = form.querySelector<HTMLElement>('[data-form-status]')!;
+    const submit = form.querySelector<HTMLButtonElement>('[data-submit]')!;
+    const page = form.querySelector<HTMLInputElement>('[data-page-field]');
+    if (page) page.value = location.href;
+
+    // Попередній вибір напряму з адреси сторінки: /contacts/?direction=chess
+    const preset = new URLSearchParams(location.search).get('direction');
+    const select = form.querySelector<HTMLSelectElement>('[data-direction-select]');
+    if (preset && select && [...select.options].some((o) => o.value === preset)) select.value = preset;
+
+    const show = (msg: string, kind: 'ok' | 'err' | 'info') => {
+      status.textContent = msg;
+      status.className =
+        'rounded-xl px-4 py-3 font-medium ' +
+        (kind === 'ok' ? 'bg-emerald-50 text-emerald-900' : kind === 'err' ? 'bg-red-50 text-red-900' : 'bg-brand-50 text-brand-900');
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      if (form.dataset.configured !== 'true') {
+        show(form.dataset.msgNotConfigured ?? '', 'info');
+        return;
+      }
+      submit.disabled = true;
+      const original = submit.textContent;
+      submit.textContent = form.dataset.msgSending ?? '…';
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+        if (!res.ok) throw new Error(String(res.status));
+        form.reset();
+        show(form.dataset.msgSuccess ?? '', 'ok');
+      } catch {
+        show(form.dataset.msgError ?? '', 'err');
+      } finally {
+        submit.disabled = false;
+        submit.textContent = original;
+      }
+    });
+  });
+</script>

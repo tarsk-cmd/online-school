@@ -1,0 +1,7 @@
+---
+import CatalogView from '@/views/CatalogView.astro';
+import type { Lang } from '@/i18n/ui';
+export const getStaticPaths = () => [{ params: { lang: 'en' } }, { params: { lang: 'pl' } }];
+const lang = Astro.params.lang as Lang;
+---
+<CatalogView lang={lang} />

@@ -1,0 +1,38 @@
+---
+import type { Lang } from '@/i18n/ui';
+import { useTranslations } from '@/i18n/ui';
+import { localizedPath } from '@/i18n/routes';
+import { DIRECTION_THEME, l } from '@/lib/text';
+import type { Direction } from '@/lib/content';
+import Icon from './Icon.astro';
+
+interface Props { direction: Direction; lang: Lang; headingLevel?: 'h2' | 'h3' }
+const { direction, lang, headingLevel = 'h3' } = Astro.props;
+const t = useTranslations(lang);
+const d = direction.data;
+const theme = DIRECTION_THEME[d.color];
+// Сторінки напрямів поки є лише українською; для en/pl ведемо в каталог із фільтром
+const href = lang === 'uk' ? localizedPath('uk', `/directions/${direction.id}/`) : localizedPath(lang, `/courses/?subject=${direction.id}`);
+const H = headingLevel;
+---
+<article class:list={['card group relative flex h-full flex-col p-6 transition hover:-translate-y-0.5 hover:shadow-md', theme.ring]}>
+  <div class="flex items-start justify-between gap-3">
+    <span class:list={['grid size-14 place-items-center rounded-2xl', theme.icon]}>
+      <Icon name={d.icon} class="size-8" />
+    </span>
+    {d.flagship && <span class="rounded-full bg-sun-400 px-3 py-1 text-xs font-bold text-ink">{t('direction.flagship')}</span>}
+  </div>
+  <H class="mt-5 text-xl font-bold">
+    <a href={href} class="after:absolute after:inset-0 after:rounded-2xl focus-visible:outline-none">{l(d.title, lang)}</a>
+  </H>
+  <p class="mt-2 grow text-muted">{l(d.short, lang)}</p>
+  <p class:list={['mt-5 inline-flex items-center gap-1 font-semibold', theme.text]} aria-hidden="true">
+    {t('cta.more')} <Icon name="arrow" class="size-4 transition-transform group-hover:translate-x-1" />
+  </p>
+</article>
+<style>
+  article:has(a:focus-visible) {
+    outline: 3px solid var(--color-brand-600);
+    outline-offset: 2px;
+  }
+</style>
