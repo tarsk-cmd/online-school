@@ -1,0 +1,49 @@
+{
+  "_help": "Тексти головної сторінки: кроки «Як проходить навчання» і переваги. Іконки: chess, users, calendar, chart, shield, heart, target, laptop, star, clock, book, globe.",
+  "steps": {
+    "uk": [
+      { "title": "Заявка", "text": "Залишаєте заявку на сайті або пишете в месенджер. Ми зв’язуємося протягом робочого дня й уточнюємо вік, інтереси та зручний час." },
+      { "title": "Безкоштовний пробний урок", "text": "Дитина знайомиться з викладачем, а викладач визначає рівень. Ви бачите, як проходить заняття, і нічим не ризикуєте." },
+      { "title": "Група або індивідуальний план", "text": "Підбираємо групу за віком і рівнем або складаємо індивідуальний план. Узгоджуємо розклад і формат оплати." },
+      { "title": "Навчання і звіти", "text": "Регулярні заняття, домашні завдання онлайн і короткий звіт для батьків після кожного модуля: що вже вміє дитина і що далі." }
+    ],
+    "en": [
+      { "title": "Request", "text": "Leave a request on the site or message us. We get in touch within a business day to discuss age, interests and time." },
+      { "title": "Free trial lesson", "text": "Your child meets the teacher, and the teacher assesses the level. You see how lessons work — with no risk." },
+      { "title": "Group or personal plan", "text": "We match a group by age and level or create a personal plan, and agree on the schedule and payment." },
+      { "title": "Learning and reports", "text": "Regular lessons, online homework and a short report for parents after every module." }
+    ],
+    "pl": [
+      { "title": "Zgłoszenie", "text": "Zostaw zgłoszenie na stronie lub napisz w komunikatorze. Odezwiemy się w ciągu dnia roboczego." },
+      { "title": "Darmowa lekcja próbna", "text": "Dziecko poznaje nauczyciela, a nauczyciel ocenia poziom. Widzisz, jak wyglądają zajęcia — bez ryzyka." },
+      { "title": "Grupa lub plan indywidualny", "text": "Dobieramy grupę według wieku i poziomu lub tworzymy plan indywidualny. Ustalamy grafik i płatności." },
+      { "title": "Nauka i raporty", "text": "Regularne zajęcia, zadania domowe online i krótki raport dla rodziców po każdym module." }
+    ]
+  },
+  "advantages": {
+    "uk": [
+      { "icon": "users", "title": "Маленькі групи", "text": "До 6 дітей одного віку й рівня. Викладач чує кожного, а дитина не «відсиджується»." },
+      { "icon": "chess", "title": "Сильний шаховий напрям", "text": "Школу заснував практикуючий шаховий тренер — і цей підхід ми переносимо на всі напрями." },
+      { "icon": "chart", "title": "Прозорий прогрес", "text": "Після кожного модуля — звіт для батьків: що засвоєно, над чим працюємо далі." },
+      { "icon": "shield", "title": "Безпечне онлайн-середовище", "text": "Закриті заняття з паролем, дитячі режими на платформах, жодних контактів дітей з незнайомцями." },
+      { "icon": "heart", "title": "Без тиску і критики", "text": "Помилка — частина навчання. Ми хвалимо за зусилля і вчимо не боятися складних задач." },
+      { "icon": "calendar", "title": "Гнучкий розклад", "text": "Ранкові, денні й вечірні групи, індивідуальні заняття в зручний час — у тому числі для сімей за кордоном." }
+    ],
+    "en": [
+      { "icon": "users", "title": "Small groups", "text": "Up to 6 kids of the same age and level. The teacher hears everyone." },
+      { "icon": "chess", "title": "Strong chess programme", "text": "The school was founded by a practising chess coach, and we bring this approach to all subjects." },
+      { "icon": "chart", "title": "Transparent progress", "text": "A report for parents after every module: what has been learned and what comes next." },
+      { "icon": "shield", "title": "Safe online environment", "text": "Password-protected lessons, kid modes on platforms, no contact with strangers." },
+      { "icon": "heart", "title": "No pressure", "text": "Mistakes are part of learning. We praise effort and teach kids not to fear hard problems." },
+      { "icon": "calendar", "title": "Flexible schedule", "text": "Morning, afternoon and evening groups plus one-to-one lessons — also for families abroad." }
+    ],
+    "pl": [
+      { "icon": "users", "title": "Małe grupy", "text": "Do 6 dzieci w tym samym wieku i na tym samym poziomie. Nauczyciel słyszy każdego." },
+      { "icon": "chess", "title": "Silny kierunek szachowy", "text": "Szkołę założył praktykujący trener szachowy — to podejście przenosimy na wszystkie kierunki." },
+      { "icon": "chart", "title": "Przejrzyste postępy", "text": "Po każdym module raport dla rodziców: co opanowane, nad czym pracujemy dalej." },
+      { "icon": "shield", "title": "Bezpieczne środowisko online", "text": "Zajęcia z hasłem, tryby dla dzieci na platformach, brak kontaktu z obcymi." },
+      { "icon": "heart", "title": "Bez presji", "text": "Błąd to część nauki. Chwalimy za wysiłek i uczymy nie bać się trudnych zadań." },
+      { "icon": "calendar", "title": "Elastyczny grafik", "text": "Grupy poranne, popołudniowe i wieczorne oraz lekcje indywidualne — także dla rodzin za granicą." }
+    ]
+  }
+}

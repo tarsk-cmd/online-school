@@ -1,0 +1,30 @@
+{
+  "_help": "Загальні запитання для головної сторінки. Додавайте нові пари {\"q\": \"питання\", \"a\": \"відповідь\"} у список потрібної мови.",
+  "uk": [
+    { "q": "З якого віку можна починати?", "a": "З 6 років — шахи, англійська, Scratch, музика. Для кожного віку ми адаптуємо тривалість заняття: для молодших 30–45 хвилин, для старших — 60–90." },
+    { "q": "Як проходить безкоштовний пробний урок?", "a": "Це повноцінне заняття 30–45 хвилин з викладачем (у міні-групі або індивідуально). Викладач знайомиться з дитиною й оцінює рівень, а після уроку дає батькам рекомендації. Ні до чого не зобов’язує." },
+    { "q": "Що потрібно для занять?", "a": "Комп’ютер, ноутбук або планшет з камерою і мікрофоном, стабільний інтернет і тихе місце. Для програмування — обов’язково комп’ютер з клавіатурою, для музики — інструмент. Детально — на сторінці «Для батьків»." },
+    { "q": "Чи можна змінити групу або викладача?", "a": "Так. Якщо дитині некомфортно або рівень групи не підходить, ми запропонуємо іншу групу чи викладача." },
+    { "q": "Що буде, якщо дитина пропустить заняття?", "a": "В індивідуальному форматі заняття можна перенести, попередивши заздалегідь (умови — на сторінці «Ціни»). У групі надсилаємо матеріали уроку й домашнє завдання, щоб дитина наздогнала." },
+    { "q": "Як оплачувати?", "a": "Разово за заняття або абонементом на 4 чи 8 занять. Діють сімейні знижки. [ЗАПОВНИТИ: способи оплати — картка, рахунок ФОП тощо]" },
+    { "q": "Ми живемо за кордоном. Можна займатися?", "a": "Так, усі заняття онлайн. Підбираємо групи з урахуванням часових поясів, а розклад вказуємо за Києвом." }
+  ],
+  "en": [
+    { "q": "From what age can kids start?", "a": "From 6 — chess, English, Scratch, music. Lesson length is adapted to age: 30–45 minutes for younger kids, 60–90 for older ones." },
+    { "q": "How does the free trial lesson work?", "a": "It is a full 30–45 minute lesson with a teacher. The teacher gets to know your child, assesses the level and gives recommendations. No obligation." },
+    { "q": "What equipment is needed?", "a": "A computer, laptop or tablet with a camera and microphone, stable internet and a quiet place. Coding requires a computer with a keyboard; music requires an instrument." },
+    { "q": "Can we change the group or teacher?", "a": "Yes. If the group or teacher is not a good fit, we will offer another option." },
+    { "q": "What if my child misses a lesson?", "a": "One-to-one lessons can be rescheduled with advance notice. In groups we send the lesson materials and homework." },
+    { "q": "How do we pay?", "a": "Per lesson or with a 4- or 8-lesson package. Family discounts apply." },
+    { "q": "We live abroad. Can we join?", "a": "Yes, all lessons are online. We take time zones into account; the schedule is shown in Kyiv time." }
+  ],
+  "pl": [
+    { "q": "Od jakiego wieku można zacząć?", "a": "Od 6 lat — szachy, angielski, Scratch, muzyka. Długość zajęć dopasowujemy do wieku: 30–45 minut dla młodszych, 60–90 dla starszych." },
+    { "q": "Jak wygląda darmowa lekcja próbna?", "a": "To pełne zajęcia 30–45 minut z nauczycielem. Nauczyciel poznaje dziecko, ocenia poziom i daje rodzicom rekomendacje. Bez zobowiązań." },
+    { "q": "Co jest potrzebne do zajęć?", "a": "Komputer, laptop lub tablet z kamerą i mikrofonem, stabilny internet i ciche miejsce. Do programowania potrzebny jest komputer z klawiaturą, do muzyki — instrument." },
+    { "q": "Czy można zmienić grupę lub nauczyciela?", "a": "Tak. Jeśli grupa lub nauczyciel nie pasuje, zaproponujemy inną opcję." },
+    { "q": "Co jeśli dziecko opuści zajęcia?", "a": "Lekcje indywidualne można przełożyć z wyprzedzeniem. W grupach wysyłamy materiały i zadanie domowe." },
+    { "q": "Jak płacić?", "a": "Za pojedynczą lekcję lub pakietem 4 albo 8 lekcji. Obowiązują zniżki rodzinne." },
+    { "q": "Mieszkamy za granicą. Czy możemy się uczyć?", "a": "Tak, wszystkie zajęcia są online. Uwzględniamy strefy czasowe; grafik podajemy w czasie kijowskim." }
+  ]
+}
