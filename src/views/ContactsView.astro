@@ -22,17 +22,17 @@ const t = useTranslations(lang);
           <MessengerButtons lang={lang} class="mt-4" />
         </div>
         <dl class="grid gap-5">
-          <div class="flex gap-4">
-            <span class="grid size-11 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-800"><Icon name="phone" /></span>
-            <div><dt class="font-semibold">{t('contacts.phone')}</dt><dd><a class="text-brand-700 underline" href={`tel:${site.contacts.phoneHref}`}>{site.contacts.phone}</a></dd></div>
+          <div class="relative min-h-11 pl-15">
+            <dt class="font-semibold"><span class="absolute top-0 left-0 grid size-11 place-items-center rounded-xl bg-brand-50 text-brand-800"><Icon name="phone" /></span>{t('contacts.phone')}</dt>
+            <dd><a class="text-brand-700 underline" href={`tel:${site.contacts.phoneHref}`}>{site.contacts.phone}</a></dd>
           </div>
-          <div class="flex gap-4">
-            <span class="grid size-11 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-800"><Icon name="mail" /></span>
-            <div><dt class="font-semibold">{t('contacts.email')}</dt><dd><a class="break-all text-brand-700 underline" href={`mailto:${site.contacts.email}`}>{site.contacts.email}</a></dd></div>
+          <div class="relative min-h-11 pl-15">
+            <dt class="font-semibold"><span class="absolute top-0 left-0 grid size-11 place-items-center rounded-xl bg-brand-50 text-brand-800"><Icon name="mail" /></span>{t('contacts.email')}</dt>
+            <dd><a class="break-all text-brand-700 underline" href={`mailto:${site.contacts.email}`}>{site.contacts.email}</a></dd>
           </div>
-          <div class="flex gap-4">
-            <span class="grid size-11 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-800"><Icon name="clock" /></span>
-            <div><dt class="font-semibold">{t('contacts.hours')}</dt><dd class="text-muted">{l(site.contacts.workingHours, lang)}</dd></div>
+          <div class="relative min-h-11 pl-15">
+            <dt class="font-semibold"><span class="absolute top-0 left-0 grid size-11 place-items-center rounded-xl bg-brand-50 text-brand-800"><Icon name="clock" /></span>{t('contacts.hours')}</dt>
+            <dd class="text-muted">{l(site.contacts.workingHours, lang)}</dd>
           </div>
         </dl>
       </div>

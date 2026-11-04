@@ -142,15 +142,15 @@ const details = [
         <h2 id="details-title" class="text-xl font-bold">{t('course.details')}</h2>
         <dl class="mt-5 space-y-4">
           {details.map((d) => (
-            <div class="flex gap-3">
-              <Icon name={d.icon} class="mt-0.5 size-5 shrink-0 text-brand-700" />
-              <div><dt class="text-sm font-semibold text-muted">{d.label}</dt><dd>{d.value}</dd></div>
+            <div class="relative pl-8">
+              <dt class="text-sm font-semibold text-muted"><Icon name={d.icon} class="absolute top-0.5 left-0 size-5 text-brand-700" />{d.label}</dt>
+              <dd>{d.value}</dd>
             </div>
           ))}
           {c.tools.length > 0 && (
-            <div class="flex gap-3">
-              <Icon name="laptop" class="mt-0.5 size-5 shrink-0 text-brand-700" />
-              <div><dt class="text-sm font-semibold text-muted">{t('course.tools')}</dt><dd>{c.tools.join(', ')}</dd></div>
+            <div class="relative pl-8">
+              <dt class="text-sm font-semibold text-muted"><Icon name="laptop" class="absolute top-0.5 left-0 size-5 text-brand-700" />{t('course.tools')}</dt>
+              <dd>{c.tools.join(', ')}</dd>
             </div>
           )}
         </dl>

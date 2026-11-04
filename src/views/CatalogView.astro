@@ -28,7 +28,13 @@ const groups = [
   <section class="section pt-8 sm:pt-10">
     <div class="container-page grid gap-8 lg:grid-cols-[280px_1fr]">
       <form class="lg:sticky lg:top-20 lg:self-start" data-filters aria-labelledby="filters-title">
-        <h2 id="filters-title" class="text-xl font-bold">{t('catalog.filters')}</h2>
+        <details class="group rounded-2xl border border-slate-200 bg-white p-4 lg:border-0 lg:bg-transparent lg:p-0" data-filters-details>
+        <summary class="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 lg:pointer-events-none [&::-webkit-details-marker]:hidden">
+          <h2 id="filters-title" class="text-xl font-bold">{t('catalog.filters')} <span class="text-base font-medium text-muted" data-active-count></span></h2>
+          <span class="grid size-9 place-items-center rounded-full bg-brand-50 text-brand-800 transition-transform group-open:rotate-180 lg:hidden" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+          </span>
+        </summary>
         <div class="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
           {groups.map((g) => (
             <fieldset>
@@ -45,6 +51,7 @@ const groups = [
           ))}
         </div>
         <button type="reset" class="btn-ghost mt-5 min-h-11 px-3 underline">{t('catalog.reset')}</button>
+        </details>
       </form>
 
       <div>
@@ -89,6 +96,9 @@ const groups = [
       if (ok) visible++;
     }
     if (count) count.textContent = String(visible);
+    const active = keys.reduce((n, k) => n + selected[k].length, 0);
+    const badge = document.querySelector<HTMLElement>('[data-active-count]');
+    if (badge) badge.textContent = active ? `(${active})` : '';
     empty?.classList.toggle('hidden', visible > 0);
 
     const params = new URLSearchParams();
@@ -96,6 +106,14 @@ const groups = [
     const qs = params.toString();
     history.replaceState(null, '', qs ? `?${qs}` : location.pathname);
   }
+
+  // На десктопі фільтри завжди розгорнуті, на телефоні — згорнуті, щоб одразу було видно курси
+  const details = document.querySelector<HTMLDetailsElement>('[data-filters-details]');
+  const mq = window.matchMedia('(min-width: 1024px)');
+  const syncOpen = () => { if (details) details.open = mq.matches; };
+  syncOpen();
+  mq.addEventListener('change', syncOpen);
+  details?.querySelector('summary')?.addEventListener('click', (e) => { if (mq.matches) e.preventDefault(); });
 
   if (form) {
     // Початкові фільтри з адреси: /courses/?subject=chess&age=6-8

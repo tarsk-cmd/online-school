@@ -139,6 +139,13 @@
   .prose-school table {
     @apply w-full border-collapse text-left text-base;
   }
+  @media (max-width: 640px) {
+    .prose-school table {
+      display: block;
+      overflow-x: auto;
+      font-size: 0.9375rem;
+    }
+  }
   .prose-school th,
   .prose-school td {
     @apply border border-slate-200 px-3 py-2;
