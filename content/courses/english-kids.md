@@ -3,7 +3,6 @@ title: "Англійська для дітей"
 direction: languages
 summary: "Розмовна англійська через ігри, пісні й міні-проєкти. Для дітей 6–11 років — з нуля або для продовження після школи."
 order: 1
-draft: true
 ages: ["6-8", "9-11"]
 ageLabel: "6–11 років"
 formats: ["group", "individual"]
