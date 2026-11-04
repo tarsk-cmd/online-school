@@ -1,0 +1,51 @@
+---
+import { useTranslations, type Lang } from '@/i18n/ui';
+import { localizedPath } from '@/i18n/routes';
+import { DIRECTION_THEME, l } from '@/lib/text';
+import type { Course, Direction } from '@/lib/content';
+import Icon from './Icon.astro';
+
+interface Props { course: Course; direction: Direction; lang: Lang; headingLevel?: 'h2' | 'h3' }
+const { course, direction, lang, headingLevel = 'h3' } = Astro.props;
+const t = useTranslations(lang);
+const c = course.data;
+const d = direction.data;
+const theme = DIRECTION_THEME[d.color];
+const tr = lang !== 'uk' ? c.translations[lang] : undefined;
+const title = tr?.title ?? c.title;
+const summary = tr?.summary ?? c.summary;
+const href = localizedPath('uk', `/courses/${course.id}/`);
+const H = headingLevel;
+---
+<article
+  class="card relative flex h-full flex-col p-6"
+  data-course
+  data-age={c.ages.join(' ')}
+  data-subject={direction.id}
+  data-format={c.formats.join(' ')}
+  data-level={c.levels.join(' ')}
+>
+  <div class="flex items-center gap-3">
+    <span class:list={['grid size-10 shrink-0 place-items-center rounded-xl', theme.icon]}><Icon name={d.icon} class="size-6" /></span>
+    <span class:list={['text-sm font-semibold', theme.text]}>{l(d.title, lang)}</span>
+  </div>
+  <H class="mt-4 text-xl font-bold">
+    <a href={href} hreflang={lang !== 'uk' ? 'uk' : undefined} class="after:absolute after:inset-0 after:rounded-2xl">{title}</a>
+  </H>
+  <p class="mt-2 grow text-muted">{summary}</p>
+  <ul class="mt-4 flex flex-wrap gap-2 text-sm" aria-label={t('course.details')}>
+    <li class="chip"><Icon name="user" class="mr-1 size-4" />{lang === 'uk' ? c.ageLabel : `${c.ages[0].split('-')[0]}–${c.ages[c.ages.length - 1].split('-')[1]} ${t('catalog.years')}`}</li>
+    {c.formats.map((f) => <li class="chip bg-slate-100 text-slate-800">{t(`format.${f}`)}</li>)}
+    {c.levels.map((lv) => <li class="chip bg-sun-200 text-ink">{t(`level.${lv}`)}</li>)}
+  </ul>
+  {lang !== 'uk' && <p class="mt-3 text-xs text-muted">↗ {t('course.ukOnly')}</p>}
+</article>
+<style>
+  article:has(a:focus-visible) {
+    outline: 3px solid var(--color-brand-600);
+    outline-offset: 2px;
+  }
+  article a:focus-visible {
+    outline: none;
+  }
+</style>

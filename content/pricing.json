@@ -1,0 +1,84 @@
+{
+  "_help": "Ціни та пакети. Ціни вказуйте рядком, наприклад «450 грн». Позначка highlighted: true виділяє пакет як найпопулярніший.",
+  "currencyNote": {
+    "uk": "Ціни вказано в гривнях за одне заняття. [ЗАПОВНИТИ: чи можлива оплата в євро/злотих для сімей за кордоном]",
+    "en": "Prices are in UAH per lesson. [TODO: EUR/PLN payment options]",
+    "pl": "Ceny podane w hrywnach za jedną lekcję. [TODO: płatność w EUR/PLN]"
+  },
+  "packages": [
+    {
+      "id": "single",
+      "lessons": "1",
+      "name": { "uk": "Разове заняття", "en": "Single lesson", "pl": "Pojedyncza lekcja" },
+      "description": { "uk": "Щоб спробувати після пробного уроку або для нерегулярних консультацій.", "en": "To try after the trial lesson or for occasional consultations.", "pl": "Na próbę po lekcji próbnej lub na okazjonalne konsultacje." },
+      "priceGroup": "[ЗАПОВНИТИ] грн",
+      "priceIndividual": "[ЗАПОВНИТИ] грн",
+      "validity": { "uk": "—", "en": "—", "pl": "—" },
+      "features": {
+        "uk": ["Оплата за кожне заняття", "Матеріали уроку"],
+        "en": ["Pay per lesson", "Lesson materials"],
+        "pl": ["Płatność za każdą lekcję", "Materiały z lekcji"]
+      }
+    },
+    {
+      "id": "pack4",
+      "lessons": "4",
+      "name": { "uk": "Абонемент на 4 заняття", "en": "4-lesson package", "pl": "Karnet na 4 lekcje" },
+      "description": { "uk": "Оптимально для занять раз на тиждень.", "en": "Ideal for one lesson a week.", "pl": "Optymalny przy zajęciach raz w tygodniu." },
+      "priceGroup": "[ЗАПОВНИТИ] грн",
+      "priceIndividual": "[ЗАПОВНИТИ] грн",
+      "validity": { "uk": "5 тижнів", "en": "5 weeks", "pl": "5 tygodni" },
+      "features": {
+        "uk": ["Ціна за заняття нижча, ніж разово", "Домашні завдання з перевіркою", "Звіт для батьків після модуля"],
+        "en": ["Lower price per lesson", "Homework with feedback", "Report after each module"],
+        "pl": ["Niższa cena za lekcję", "Zadania domowe ze sprawdzeniem", "Raport po każdym module"]
+      }
+    },
+    {
+      "id": "pack8",
+      "lessons": "8",
+      "highlighted": true,
+      "name": { "uk": "Абонемент на 8 занять", "en": "8-lesson package", "pl": "Karnet na 8 lekcji" },
+      "description": { "uk": "Для занять двічі на тиждень — найкращий темп для прогресу.", "en": "For two lessons a week — the best pace for progress.", "pl": "Na zajęcia dwa razy w tygodniu — najlepsze tempo." },
+      "priceGroup": "[ЗАПОВНИТИ] грн",
+      "priceIndividual": "[ЗАПОВНИТИ] грн",
+      "validity": { "uk": "5 тижнів", "en": "5 weeks", "pl": "5 tygodni" },
+      "features": {
+        "uk": ["Найвигідніша ціна за заняття", "Домашні завдання з перевіркою", "Звіт для батьків після модуля", "Одне перенесення індивідуального заняття без втрати"],
+        "en": ["Best price per lesson", "Homework with feedback", "Report after each module", "One free reschedule of a one-to-one lesson"],
+        "pl": ["Najlepsza cena za lekcję", "Zadania domowe ze sprawdzeniem", "Raport po każdym module", "Jedno bezpłatne przełożenie lekcji indywidualnej"]
+      }
+    }
+  ],
+  "discounts": [
+    {
+      "title": { "uk": "Сімейна знижка", "en": "Family discount", "pl": "Zniżka rodzinna" },
+      "text": { "uk": "[ЗАПОВНИТИ]% на кожен абонемент, якщо у школі навчаються 2 і більше дітей з однієї сім’ї.", "en": "[TODO]% off each package when 2 or more children from one family study with us.", "pl": "[TODO]% zniżki na każdy karnet, gdy u nas uczy się 2 lub więcej dzieci z jednej rodziny." }
+    },
+    {
+      "title": { "uk": "Два предмети", "en": "Two subjects", "pl": "Dwa przedmioty" },
+      "text": { "uk": "[ЗАПОВНИТИ]% на другий абонемент, якщо дитина займається 2 і більше напрямами.", "en": "[TODO]% off the second package when a child studies 2 or more subjects.", "pl": "[TODO]% zniżki na drugi karnet, gdy dziecko uczy się 2 lub więcej przedmiotów." }
+    }
+  ],
+  "notes": {
+    "uk": [
+      "Перше пробне заняття — безкоштовне.",
+      "Індивідуальне заняття можна перенести, попередивши щонайменше за [ЗАПОВНИТИ] годин.",
+      "Пропущене групове заняття не переноситься, але дитина отримує матеріали й домашнє завдання.",
+      "Підготовка до іспитів і сертифікатів тарифікується окремо. [ЗАПОВНИТИ: ціни на підготовку до іспитів]",
+      "[ЗАПОВНИТИ: умови повернення коштів за невикористані заняття]"
+    ],
+    "en": [
+      "The first trial lesson is free.",
+      "One-to-one lessons can be rescheduled with advance notice.",
+      "Missed group lessons are not rescheduled, but materials and homework are provided.",
+      "Exam preparation is priced separately."
+    ],
+    "pl": [
+      "Pierwsza lekcja próbna jest bezpłatna.",
+      "Lekcje indywidualne można przełożyć z wyprzedzeniem.",
+      "Opuszczone zajęcia grupowe nie są przekładane, ale dziecko otrzymuje materiały i zadanie domowe.",
+      "Przygotowanie do egzaminów wyceniane jest osobno."
+    ]
+  }
+}

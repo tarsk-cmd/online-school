@@ -1,0 +1,79 @@
+---
+/** Сторінка напряму — генерується для кожного файлу з content/directions/ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { useTranslations } from '@/i18n/ui';
+import { localizedPath } from '@/i18n/routes';
+import { DIRECTION_THEME, l } from '@/lib/text';
+import { getCourses, getDirections, getTeachers, type Direction } from '@/lib/content';
+import PageHeader from '@/components/PageHeader.astro';
+import CourseCard from '@/components/CourseCard.astro';
+import TeacherCard from '@/components/TeacherCard.astro';
+import CtaBanner from '@/components/CtaBanner.astro';
+import Icon from '@/components/Icon.astro';
+
+export async function getStaticPaths() {
+  return (await getDirections()).map((direction) => ({ params: { slug: direction.id }, props: { direction } }));
+}
+interface Props { direction: Direction }
+const { direction } = Astro.props;
+const lang = 'uk' as const;
+const t = useTranslations(lang);
+const d = direction.data;
+const theme = DIRECTION_THEME[d.color];
+const courses = (await getCourses()).filter((c) => c.data.direction.id === direction.id);
+const teachers = (await getTeachers()).filter((tc) => tc.data.directions.some((r) => r.id === direction.id));
+const title = l(d.title, lang);
+---
+<BaseLayout title={title} description={l(d.short, lang)} lang={lang}>
+  <PageHeader
+    lang={lang}
+    title={title}
+    lead={l(d.short, lang)}
+    eyebrow={d.flagship ? t('direction.flagship') : undefined}
+    crumbs={[{ label: t('catalog.title'), href: localizedPath(lang, '/courses/') }, { label: title }]}
+  >
+    {d.subjects.length > 0 && (
+      <ul class="mt-6 flex flex-wrap gap-2">{d.subjects.map((s) => <li class="chip bg-white">{s}</li>)}</ul>
+    )}
+    <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+      <a href={localizedPath(lang, `/contacts/?direction=${direction.id}#signup`)} class="btn-primary">{t('cta.trial')}</a>
+      {d.teens && <a href={localizedPath(lang, '/exams/')} class="btn-secondary">Про підготовку до іспитів</a>}
+    </div>
+  </PageHeader>
+
+  <section class="section">
+    <div class="container-page grid gap-10 lg:grid-cols-[1.3fr_1fr]">
+      <div>
+        <p class="text-lg leading-relaxed">{d.description}</p>
+      </div>
+      <div class:list={['rounded-2xl border p-6', theme.bg, theme.border]}>
+        <h2 class="text-xl font-bold">{t('direction.highlights')}</h2>
+        <ul class="mt-4 space-y-3">
+          {d.highlights.map((h) => <li class="flex gap-3"><Icon name="check" class={`mt-0.5 size-5 shrink-0 ${theme.text}`} />{h}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-white" aria-labelledby="dir-courses">
+    <div class="container-page">
+      <h2 id="dir-courses" class="h2">{t('direction.courses')}</h2>
+      <ul class="mt-6 grid gap-5 md:grid-cols-2">
+        {courses.map((c) => <li><CourseCard course={c} direction={direction} lang={lang} /></li>)}
+      </ul>
+    </div>
+  </section>
+
+  {teachers.length > 0 && (
+    <section class="section" aria-labelledby="dir-teachers">
+      <div class="container-page">
+        <h2 id="dir-teachers" class="h2">{t('course.teachers')}</h2>
+        <ul class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {teachers.map((tc) => <li><TeacherCard teacher={tc} lang={lang} /></li>)}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <CtaBanner lang={lang} direction={direction.id} />
+</BaseLayout>

@@ -1,0 +1,28 @@
+---
+/**
+ * Сторінки, які ще не перекладені англійською та польською (TODO).
+ * Коли переклад буде готовий — створіть окремий файл, як [lang]/pricing/index.astro.
+ */
+import TodoView from '@/views/TodoView.astro';
+import { useTranslations, type Lang, type UIKey } from '@/i18n/ui';
+
+const PAGES: Record<string, UIKey> = {
+  exams: 'nav.exams',
+  tutoring: 'nav.tutoring',
+  teachers: 'nav.teachers',
+  parents: 'nav.parents',
+  blog: 'nav.blog',
+  privacy: 'footer.privacy',
+  terms: 'footer.terms',
+};
+
+export function getStaticPaths() {
+  return ['en', 'pl'].flatMap((lang) =>
+    ['exams', 'tutoring', 'teachers', 'parents', 'blog', 'privacy', 'terms'].map((page) => ({ params: { lang, page } })),
+  );
+}
+const lang = Astro.params.lang as Lang;
+const page = Astro.params.page as string;
+const t = useTranslations(lang);
+---
+<TodoView lang={lang} path={`/${page}/`} title={t(PAGES[page])} />

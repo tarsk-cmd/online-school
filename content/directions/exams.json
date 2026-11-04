@@ -1,0 +1,20 @@
+{
+  "order": 6,
+  "icon": "exams",
+  "color": "amber",
+  "teens": true,
+  "title": { "uk": "Іспити й сертифікати", "en": "Exams & certificates", "pl": "Egzaminy i certyfikaty" },
+  "short": {
+    "uk": "Для 14–17 років: підготовка до НМТ, Cambridge, IELTS, TOEFL, DELE та сертифікатів з польської.",
+    "en": "Ages 14–17: preparation for the Ukrainian NMT, Cambridge, IELTS, TOEFL, DELE and Polish certificates.",
+    "pl": "14–17 lat: przygotowanie do ukraińskiego NMT, Cambridge, IELTS, TOEFL, DELE i certyfikatów z polskiego."
+  },
+  "description": "Окремий напрям для старшокласників. Готуємо до національного мультипредметного тесту (НМТ) з математики, української мови та англійської, а також до міжнародних іспитів і сертифікатів: Cambridge English (B1 Preliminary, B2 First, C1 Advanced), IELTS, TOEFL iBT, DELE (іспанська) та державних сертифікатів з польської мови. Починаємо з діагностичного тесту в форматі іспиту, складаємо план до дати складання й регулярно робимо пробні тести.",
+  "subjects": ["НМТ", "Cambridge", "IELTS", "TOEFL", "DELE", "Польська (сертифікат)"],
+  "highlights": [
+    "Стартова діагностика у форматі реального іспиту",
+    "Індивідуальний план до дати іспиту з контрольними точками",
+    "Регулярні пробні тести з детальним розбором",
+    "Стратегії виконання завдань і робота з часом"
+  ]
+}

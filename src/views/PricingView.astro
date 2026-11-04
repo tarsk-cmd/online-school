@@ -1,0 +1,101 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { useTranslations, type Lang } from '@/i18n/ui';
+import { localizedPath } from '@/i18n/routes';
+import { l } from '@/lib/text';
+import PageHeader from '@/components/PageHeader.astro';
+import CtaBanner from '@/components/CtaBanner.astro';
+import Icon from '@/components/Icon.astro';
+import pricing from '../../content/pricing.json';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const notes = pricing.notes[lang] ?? pricing.notes.uk;
+---
+<BaseLayout title={t('pricing.title')} description={t('pricing.lead')} lang={lang}>
+  <PageHeader lang={lang} title={t('pricing.title')} lead={t('pricing.lead')} crumbs={[{ label: t('pricing.title') }]} />
+
+  <section class="section pt-10">
+    <div class="container-page">
+      <ul class="grid gap-5 lg:grid-cols-3">
+        {pricing.packages.map((p) => (
+          <li class:list={['card relative flex flex-col p-6 sm:p-8', p.highlighted && 'border-2 border-brand-700 shadow-lg']}>
+            {p.highlighted && <span class="absolute -top-3.5 left-6 rounded-full bg-sun-400 px-3 py-1 text-sm font-bold text-ink">{t('pricing.popular')}</span>}
+            <h2 class="text-2xl font-bold">{l(p.name, lang)}</h2>
+            <p class="mt-2 text-muted">{l(p.description, lang)}</p>
+            <dl class="mt-6 grid grid-cols-2 gap-3">
+              <div class="rounded-xl bg-brand-50 p-3">
+                <dt class="text-sm font-medium text-brand-800">{t('pricing.priceGroup')}</dt>
+                <dd class="font-display mt-1 text-lg font-bold text-brand-950">{p.priceGroup}</dd>
+              </div>
+              <div class="rounded-xl bg-brand-50 p-3">
+                <dt class="text-sm font-medium text-brand-800">{t('pricing.priceIndividual')}</dt>
+                <dd class="font-display mt-1 text-lg font-bold text-brand-950">{p.priceIndividual}</dd>
+              </div>
+            </dl>
+            <ul class="mt-6 grow space-y-2">
+              {(p.features[lang] ?? p.features.uk).map((f) => (
+                <li class="flex gap-2"><Icon name="check" class="mt-0.5 size-5 shrink-0 text-emerald-700" />{f}</li>
+              ))}
+            </ul>
+            <a href={localizedPath(lang, '/contacts/#signup')} class:list={['mt-8', p.highlighted ? 'btn-primary' : 'btn-secondary']}>{t('cta.trial')}</a>
+          </li>
+        ))}
+      </ul>
+      <p class="mt-6 text-sm text-muted">{l(pricing.currencyNote, lang)}</p>
+    </div>
+  </section>
+
+  <section class="section bg-white pt-14" aria-labelledby="table-title">
+    <div class="container-page">
+      <h2 id="table-title" class="h2">{t('pricing.table')}</h2>
+      <div class="mt-6 overflow-x-auto rounded-2xl border border-slate-200" tabindex="0" role="region" aria-labelledby="table-title">
+        <table class="w-full min-w-[560px] text-left">
+          <thead class="bg-brand-50 text-brand-950">
+            <tr>
+              <th scope="col" class="px-4 py-3">{t('pricing.package')}</th>
+              <th scope="col" class="px-4 py-3">{t('pricing.lessons')}</th>
+              <th scope="col" class="px-4 py-3">{t('pricing.priceGroup')}</th>
+              <th scope="col" class="px-4 py-3">{t('pricing.priceIndividual')}</th>
+              <th scope="col" class="px-4 py-3">{t('pricing.validity')}</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            {pricing.packages.map((p) => (
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold">{l(p.name, lang)}</th>
+                <td class="px-4 py-3">{p.lessons}</td>
+                <td class="px-4 py-3">{p.priceGroup}</td>
+                <td class="px-4 py-3">{p.priceIndividual}</td>
+                <td class="px-4 py-3">{l(p.validity, lang)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-14 grid gap-10 lg:grid-cols-2">
+        <div>
+          <h2 class="h2">{t('pricing.discounts')}</h2>
+          <ul class="mt-6 grid gap-4">
+            {pricing.discounts.map((d) => (
+              <li class="flex gap-4 rounded-2xl bg-sun-200/60 p-5">
+                <span class="grid size-11 shrink-0 place-items-center rounded-xl bg-white text-accent-600"><Icon name="heart" /></span>
+                <div><h3 class="text-lg font-bold">{l(d.title, lang)}</h3><p class="mt-1">{l(d.text, lang)}</p></div>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h2 class="h2">{t('pricing.notes')}</h2>
+          <ul class="mt-6 space-y-3">
+            {notes.map((n) => <li class="flex gap-3"><Icon name="check" class="mt-0.5 size-5 shrink-0 text-brand-700" />{n}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBanner lang={lang} />
+</BaseLayout>

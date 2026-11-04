@@ -1,0 +1,32 @@
+---
+import { useTranslations, type Lang } from '@/i18n/ui';
+import { localizedPath } from '@/i18n/routes';
+
+interface Crumb { label: string; href?: string }
+interface Props { lang: Lang; title: string; lead?: string; eyebrow?: string; crumbs?: Crumb[] }
+const { lang, title, lead, eyebrow, crumbs = [] } = Astro.props;
+const t = useTranslations(lang);
+const all: Crumb[] = [{ label: t('nav.home'), href: localizedPath(lang, '/') }, ...crumbs];
+---
+<section class="relative overflow-hidden border-b border-slate-200 bg-gradient-to-br from-brand-50 via-paper to-sun-200/40">
+  <div class="container-page py-10 sm:py-14">
+    <nav aria-label={t('breadcrumbs')}>
+      <ol class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted">
+        {all.map((c, i) => (
+          <li class="flex items-center gap-2">
+            {i > 0 && <span aria-hidden="true">/</span>}
+            {c.href && i < all.length - 1 ? (
+              <a href={c.href} class="underline-offset-2 hover:text-brand-800 hover:underline">{c.label}</a>
+            ) : (
+              <span aria-current={i === all.length - 1 ? 'page' : undefined}>{c.label}</span>
+            )}
+          </li>
+        ))}
+      </ol>
+    </nav>
+    {eyebrow && <p class="eyebrow mt-6">{eyebrow}</p>}
+    <h1 class:list={['max-w-4xl text-3xl font-bold sm:text-5xl', eyebrow ? 'mt-2' : 'mt-6']}>{title}</h1>
+    {lead && <p class="lead mt-4 max-w-3xl">{lead}</p>}
+    <slot />
+  </div>
+</section>
