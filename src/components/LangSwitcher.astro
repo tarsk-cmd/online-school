@@ -1,0 +1,30 @@
+---
+import { LOCALES, LANG_NAMES, useTranslations, type Lang } from '@/i18n/ui';
+import { switchTarget } from '@/i18n/routes';
+
+interface Props { lang: Lang; path: string; class?: string }
+const { lang, path, class: className = '' } = Astro.props;
+const t = useTranslations(lang);
+---
+<nav aria-label={t('nav.language')} class={className}>
+  <ul class="flex items-center gap-1 rounded-xl bg-brand-50 p-1">
+    {LOCALES.map((code) => (
+      <li>
+        <a
+          href={switchTarget(path, code)}
+          hreflang={LANG_NAMES[code].htmlLang}
+          lang={LANG_NAMES[code].htmlLang}
+          aria-current={code === lang ? 'true' : undefined}
+          title={LANG_NAMES[code].full}
+          class:list={[
+            'inline-flex min-h-10 min-w-10 items-center justify-center rounded-lg px-2 text-sm font-semibold',
+            code === lang ? 'bg-white text-brand-900 shadow-sm' : 'text-brand-800 hover:bg-white/70',
+          ]}
+        >
+          <span aria-hidden="true">{LANG_NAMES[code].short}</span>
+          <span class="sr-only">{LANG_NAMES[code].full}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>

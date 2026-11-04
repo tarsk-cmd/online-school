@@ -1,0 +1,63 @@
+---
+import { useTranslations, type Lang, type UIKey } from '@/i18n/ui';
+import { localizedPath } from '@/i18n/routes';
+import { site, isFilled } from '@/lib/site';
+import { l } from '@/lib/text';
+import Logo from './Logo.astro';
+import MessengerButtons from './MessengerButtons.astro';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const nav: { key: UIKey; href: string }[] = [
+  { key: 'nav.courses', href: '/courses/' },
+  { key: 'nav.exams', href: '/exams/' },
+  { key: 'nav.tutoring', href: '/tutoring/' },
+  { key: 'nav.teachers', href: '/teachers/' },
+  { key: 'nav.pricing', href: '/pricing/' },
+  { key: 'nav.parents', href: '/parents/' },
+  { key: 'nav.blog', href: '/blog/' },
+  { key: 'nav.contacts', href: '/contacts/' },
+];
+const year = new Date().getFullYear();
+const socials = Object.entries(site.social).filter(([, v]) => isFilled(v));
+const socialNames: Record<string, string> = { instagram: 'Instagram', facebook: 'Facebook', youtube: 'YouTube', lichessTeam: 'Lichess' };
+---
+<footer class="bg-brand-950 text-brand-100">
+  <div class="container-page grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="sm:col-span-2 lg:col-span-1">
+      <Logo lang={lang} inverted />
+      <p class="mt-4 text-sm leading-relaxed text-brand-200">{t('footer.about')}</p>
+    </div>
+    <div>
+      <h2 class="font-display text-base font-semibold text-white">{t('footer.nav')}</h2>
+      <ul class="mt-3 grid grid-cols-2 gap-x-4 gap-y-1 text-sm sm:grid-cols-1">
+        {nav.map((n) => <li><a class="inline-block py-1.5 hover:text-white hover:underline" href={localizedPath(lang, n.href)}>{t(n.key)}</a></li>)}
+      </ul>
+    </div>
+    <div>
+      <h2 class="font-display text-base font-semibold text-white">{t('footer.contacts')}</h2>
+      <ul class="mt-3 space-y-2 text-sm">
+        <li><a class="hover:text-white hover:underline" href={`tel:${site.contacts.phoneHref}`}>{site.contacts.phone}</a></li>
+        <li><a class="break-all hover:text-white hover:underline" href={`mailto:${site.contacts.email}`}>{site.contacts.email}</a></li>
+        <li class="text-brand-200">{l(site.contacts.workingHours, lang)}</li>
+      </ul>
+      <MessengerButtons lang={lang} class="mt-4" size="sm" variant="dark" />
+      {socials.length > 0 && (
+        <ul class="mt-4 flex flex-wrap gap-3 text-sm">
+          {socials.map(([k, v]) => <li><a class="hover:text-white hover:underline" href={v} target="_blank" rel="noopener noreferrer">{socialNames[k] ?? k}</a></li>)}
+        </ul>
+      )}
+    </div>
+    <div>
+      <h2 class="font-display text-base font-semibold text-white">{t('footer.legal')}</h2>
+      <ul class="mt-3 space-y-1 text-sm">
+        <li><a class="inline-block py-1.5 hover:text-white hover:underline" href={localizedPath(lang, '/privacy/')}>{t('footer.privacy')}</a></li>
+        <li><a class="inline-block py-1.5 hover:text-white hover:underline" href={localizedPath(lang, '/terms/')}>{t('footer.terms')}</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-white/10">
+    <p class="container-page py-5 text-sm text-brand-200">© {year} {l(site.fullName, lang)}. {t('footer.rights')}</p>
+  </div>
+</footer>

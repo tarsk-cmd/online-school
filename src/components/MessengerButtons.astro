@@ -1,0 +1,35 @@
+---
+import { site } from '@/lib/site';
+import Icon from './Icon.astro';
+import { useTranslations, type Lang } from '@/i18n/ui';
+
+interface Props { lang?: Lang; class?: string; size?: 'sm' | 'md'; variant?: 'light' | 'dark' }
+const { lang = 'uk', class: className = '', size = 'md', variant = 'light' } = Astro.props;
+const t = useTranslations(lang);
+
+const list = [
+  { key: 'telegram', label: 'Telegram', href: site.messengers.telegram, color: 'bg-sky-700 hover:bg-sky-800 text-white' },
+  { key: 'viber', label: 'Viber', href: site.messengers.viber, color: 'bg-violet-700 hover:bg-violet-800 text-white' },
+  { key: 'whatsapp', label: 'WhatsApp', href: site.messengers.whatsapp, color: 'bg-green-700 hover:bg-green-800 text-white' },
+].filter((m) => m.href);
+---
+<ul class:list={['flex flex-wrap gap-2', className]}>
+  {list.map((m) => (
+    <li>
+      <a
+        href={m.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        class:list={[
+          'inline-flex items-center gap-2 rounded-xl font-semibold transition-colors',
+          size === 'sm' ? 'min-h-11 px-3 text-sm' : 'min-h-12 px-4',
+          variant === 'dark' ? 'bg-white/10 text-white ring-1 ring-white/25 hover:bg-white/20' : m.color,
+        ]}
+      >
+        <Icon name={m.key} class="size-5" />
+        {m.label}
+        <span class="sr-only">{t('a11y.newWindow')}</span>
+      </a>
+    </li>
+  ))}
+</ul>

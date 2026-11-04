@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tarsk-cmd.github.io/online-school/sitemap-index.xml

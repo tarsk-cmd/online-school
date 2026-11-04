@@ -1,0 +1,146 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/rubik';
+@import '@fontsource-variable/inter';
+
+/*
+  Палітра школи «Дебют»:
+  - brand (глибокий синій, «шахова дошка, серйозність»)
+  - accent (теплий помаранчевий — головні кнопки)
+  - sun (жовтий — акценти, підкреслення)
+  - ink (основний текст), paper (фон)
+  Усі пари «текст/фон» перевірені на контраст WCAG AA (≥ 4.5:1).
+*/
+@theme {
+  --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Rubik Variable', 'Inter Variable', system-ui, sans-serif;
+
+  --color-brand-50: #eef3ff;
+  --color-brand-100: #dbe5ff;
+  --color-brand-200: #bfcfff;
+  --color-brand-300: #93adfb;
+  --color-brand-400: #6286f0;
+  --color-brand-500: #3d63dd;
+  --color-brand-600: #2a4bc4;
+  --color-brand-700: #22399b;
+  --color-brand-800: #1f327d;
+  --color-brand-900: #1c2c63;
+  --color-brand-950: #121b3d;
+
+  --color-accent-100: #ffe8da;
+  --color-accent-500: #f2712f;
+  --color-accent-600: #c2410c;
+  --color-accent-700: #9a3412;
+
+  --color-sun-200: #fff0b3;
+  --color-sun-400: #ffd54a;
+
+  --color-ink: #17203a;
+  --color-muted: #4a5470;
+  --color-paper: #fbf8f3;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-balance text-brand-950;
+  }
+  :focus-visible {
+    @apply outline-3 outline-offset-2 outline-brand-600;
+  }
+  [id] {
+    scroll-margin-top: 5rem;
+  }
+}
+
+@utility btn {
+  @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-xl px-5 py-3 text-center font-semibold leading-tight transition-colors;
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+  .section {
+    @apply py-14 sm:py-20;
+  }
+  .btn-primary {
+    @apply btn bg-accent-600 text-white shadow-sm hover:bg-accent-700;
+  }
+  .btn-secondary {
+    @apply btn border-2 border-brand-700 bg-white text-brand-800 hover:bg-brand-50;
+  }
+  .btn-ghost {
+    @apply btn text-brand-800 hover:bg-brand-50;
+  }
+  .card {
+    @apply rounded-2xl border border-slate-200 bg-white shadow-sm;
+  }
+  .chip {
+    @apply inline-flex items-center rounded-full bg-brand-50 px-3 py-1 text-sm font-medium text-brand-800;
+  }
+  .eyebrow {
+    @apply text-sm font-semibold tracking-wide text-accent-600 uppercase;
+  }
+  .h2 {
+    @apply text-3xl font-bold sm:text-4xl;
+  }
+  .lead {
+    @apply text-lg text-muted;
+  }
+
+  /* Оформлення тексту з Markdown (статті, курси, юридичні сторінки) */
+  .prose-school {
+    @apply max-w-none text-base leading-relaxed text-ink sm:text-lg;
+  }
+  .prose-school > * + * {
+    @apply mt-4;
+  }
+  .prose-school h2 {
+    @apply mt-10 text-2xl font-bold sm:text-3xl;
+  }
+  .prose-school h3 {
+    @apply mt-8 text-xl font-semibold;
+  }
+  .prose-school ul {
+    @apply list-disc space-y-1 pl-6;
+  }
+  .prose-school ol {
+    @apply list-decimal space-y-1 pl-6;
+  }
+  .prose-school a {
+    @apply font-medium text-brand-700 underline underline-offset-2 hover:text-brand-900;
+  }
+  .prose-school blockquote {
+    @apply rounded-r-xl border-l-4 border-sun-400 bg-sun-200/40 px-4 py-3 italic;
+  }
+  .prose-school strong {
+    @apply font-semibold text-brand-950;
+  }
+  .prose-school table {
+    @apply w-full border-collapse text-left text-base;
+  }
+  .prose-school th,
+  .prose-school td {
+    @apply border border-slate-200 px-3 py-2;
+  }
+}

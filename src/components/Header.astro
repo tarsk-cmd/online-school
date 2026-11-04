@@ -1,0 +1,103 @@
+---
+import { useTranslations, type Lang, type UIKey } from '@/i18n/ui';
+import { localizedPath } from '@/i18n/routes';
+import Logo from './Logo.astro';
+import LangSwitcher from './LangSwitcher.astro';
+import Icon from './Icon.astro';
+
+interface Props { lang: Lang; path: string }
+const { lang, path } = Astro.props;
+const t = useTranslations(lang);
+
+const items: { key: UIKey; href: string }[] = [
+  { key: 'nav.courses', href: '/courses/' },
+  { key: 'nav.exams', href: '/exams/' },
+  { key: 'nav.tutoring', href: '/tutoring/' },
+  { key: 'nav.teachers', href: '/teachers/' },
+  { key: 'nav.pricing', href: '/pricing/' },
+  { key: 'nav.parents', href: '/parents/' },
+  { key: 'nav.blog', href: '/blog/' },
+  { key: 'nav.contacts', href: '/contacts/' },
+];
+const isActive = (href: string) =>
+  path === href || (href === '/courses/' && path.startsWith('/directions/')) || (href !== '/' && path.startsWith(href));
+---
+<header class="sticky top-0 z-40 border-b border-slate-200/80 bg-paper/95 backdrop-blur supports-[backdrop-filter]:bg-paper/85">
+  <div class="container-page flex h-16 items-center justify-between gap-3">
+    <Logo lang={lang} />
+
+    <nav aria-label={t('nav.main')} class="hidden xl:block">
+      <ul class="flex items-center gap-1">
+        {items.map((item) => (
+          <li>
+            <a
+              href={localizedPath(lang, item.href)}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+              class:list={[
+                'rounded-lg px-2.5 py-2 text-[15px] font-medium hover:bg-brand-50 hover:text-brand-900',
+                isActive(item.href) ? 'text-brand-800 underline decoration-sun-400 decoration-[3px] underline-offset-8' : 'text-ink',
+              ]}
+            >{t(item.key)}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <LangSwitcher lang={lang} path={path} class="hidden sm:block" />
+      <a href={localizedPath(lang, '/contacts/#signup')} class="btn-primary hidden min-h-10 px-4 py-2 text-sm md:inline-flex">{t('cta.trialShort')}</a>
+      <button
+        type="button"
+        class="inline-flex size-11 items-center justify-center rounded-xl text-brand-900 hover:bg-brand-50 xl:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        data-menu-toggle
+        data-label-open={t('nav.menu')}
+        data-label-close={t('nav.close')}
+      >
+        <span class="sr-only" data-menu-label>{t('nav.menu')}</span>
+        <Icon name="menu" class="size-7" />
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="hidden border-t border-slate-200 bg-paper xl:hidden" data-menu>
+    <nav aria-label={t('nav.main')} class="container-page py-4">
+      <ul class="grid gap-1">
+        {items.map((item) => (
+          <li>
+            <a
+              href={localizedPath(lang, item.href)}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+              class:list={['flex min-h-12 items-center rounded-xl px-3 text-lg font-medium hover:bg-brand-50', isActive(item.href) ? 'bg-brand-50 text-brand-800' : 'text-ink']}
+            >{t(item.key)}</a>
+          </li>
+        ))}
+      </ul>
+      <div class="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200 pt-4">
+        <LangSwitcher lang={lang} path={path} />
+        <a href={localizedPath(lang, '/contacts/#signup')} class="btn-primary grow sm:grow-0">{t('cta.trial')}</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = document.querySelector<HTMLElement>('[data-menu]');
+  const label = document.querySelector<HTMLElement>('[data-menu-label]');
+  if (btn && menu) {
+    const set = (open: boolean) => {
+      btn.setAttribute('aria-expanded', String(open));
+      menu.classList.toggle('hidden', !open);
+      if (label) label.textContent = (open ? btn.dataset.labelClose : btn.dataset.labelOpen) ?? '';
+    };
+    btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') {
+        set(false);
+        btn.focus();
+      }
+    });
+  }
+</script>

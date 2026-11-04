@@ -1,0 +1,48 @@
+{
+  "_help": "Головні налаштування сайту. Назву школи, контакти, месенджери й адресу форми міняйте ТІЛЬКИ тут. Значення з [ЗАПОВНИТИ] — замініть на реальні.",
+
+  "name": { "uk": "Дебют", "en": "Debut", "pl": "Debiut" },
+  "fullName": { "uk": "Онлайн-школа «Дебют»", "en": "Debut Online School", "pl": "Szkoła online „Debiut”" },
+  "slogan": {
+    "uk": "Сильний початок для допитливих дітей",
+    "en": "A strong start for curious kids",
+    "pl": "Mocny start dla ciekawych świata dzieci"
+  },
+
+  "contacts": {
+    "email": "[ЗАПОВНИТИ]@example.com",
+    "phone": "+380 00 000 00 00",
+    "phoneHref": "+380000000000",
+    "workingHours": {
+      "uk": "Пн–Сб, 9:00–20:00 (за Києвом)",
+      "en": "Mon–Sat, 9:00–20:00 (Kyiv time)",
+      "pl": "Pon.–sob., 9:00–20:00 (czas kijowski)"
+    }
+  },
+
+  "messengers": {
+    "telegram": "https://t.me/ЗАПОВНИТИ_username",
+    "viber": "viber://chat?number=%2B380000000000",
+    "whatsapp": "https://wa.me/380000000000"
+  },
+
+  "social": {
+    "instagram": "",
+    "facebook": "",
+    "youtube": "",
+    "lichessTeam": "https://lichess.org/team/ЗАПОВНИТИ"
+  },
+
+  "form": {
+    "_help": "mode: \"formspree\" — форма на сайті надсилає заявку на endpoint Formspree (https://formspree.io → New form → скопіюйте адресу виду https://formspree.io/f/xxxxxxx). mode: \"google\" — замість форми показується кнопка, що відкриває Google Form за адресою googleFormUrl.",
+    "mode": "formspree",
+    "endpoint": "https://formspree.io/f/ЗАПОВНИТИ",
+    "googleFormUrl": ""
+  },
+
+  "legal": {
+    "owner": "[ЗАПОВНИТИ: ФОП / юридична особа, ПІБ або назва]",
+    "taxId": "[ЗАПОВНИТИ: ІПН / ЄДРПОУ]",
+    "address": "[ЗАПОВНИТИ: юридична адреса]"
+  }
+}
