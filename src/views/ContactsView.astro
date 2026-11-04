@@ -1,0 +1,42 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { useTranslations, type Lang } from '@/i18n/ui';
+import { site } from '@/lib/site';
+import { l } from '@/lib/text';
+import PageHeader from '@/components/PageHeader.astro';
+import LeadForm from '@/components/LeadForm.astro';
+import MessengerButtons from '@/components/MessengerButtons.astro';
+import Icon from '@/components/Icon.astro';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+<BaseLayout title={t('contacts.title')} description={t('contacts.lead')} lang={lang}>
+  <PageHeader lang={lang} title={t('contacts.title')} lead={t('contacts.lead')} crumbs={[{ label: t('contacts.title') }]} />
+  <section class="section pt-10">
+    <div class="container-page grid gap-10 lg:grid-cols-[1fr_1.4fr]">
+      <div class="space-y-8">
+        <div>
+          <h2 class="text-xl font-bold">{t('contacts.messengers')}</h2>
+          <MessengerButtons lang={lang} class="mt-4" />
+        </div>
+        <dl class="grid gap-5">
+          <div class="relative min-h-11 pl-15">
+            <dt class="font-semibold"><span class="absolute top-0 left-0 grid size-11 place-items-center rounded-xl bg-brand-50 text-brand-800"><Icon name="phone" /></span>{t('contacts.phone')}</dt>
+            <dd><a class="text-brand-700 underline" href={`tel:${site.contacts.phoneHref}`}>{site.contacts.phone}</a></dd>
+          </div>
+          <div class="relative min-h-11 pl-15">
+            <dt class="font-semibold"><span class="absolute top-0 left-0 grid size-11 place-items-center rounded-xl bg-brand-50 text-brand-800"><Icon name="mail" /></span>{t('contacts.email')}</dt>
+            <dd><a class="break-all text-brand-700 underline" href={`mailto:${site.contacts.email}`}>{site.contacts.email}</a></dd>
+          </div>
+          <div class="relative min-h-11 pl-15">
+            <dt class="font-semibold"><span class="absolute top-0 left-0 grid size-11 place-items-center rounded-xl bg-brand-50 text-brand-800"><Icon name="clock" /></span>{t('contacts.hours')}</dt>
+            <dd class="text-muted">{l(site.contacts.workingHours, lang)}</dd>
+          </div>
+        </dl>
+      </div>
+      <LeadForm lang={lang} />
+    </div>
+  </section>
+</BaseLayout>

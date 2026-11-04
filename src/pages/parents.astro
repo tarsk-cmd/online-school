@@ -1,0 +1,23 @@
+---
+import MarkdownPage from '@/components/MarkdownPage.astro';
+import Icon from '@/components/Icon.astro';
+const quick = [
+  { icon: 'chart', title: 'Прогрес', text: 'Звіт після кожного модуля', href: '#як-відстежувати-прогрес' },
+  { icon: 'shield', title: 'Безпека', text: 'Закриті заняття й дитячі режими', href: '#безпека-дітей-онлайн' },
+  { icon: 'laptop', title: 'Техніка', text: 'Пристрій, інтернет, програми', href: '#технічні-вимоги-до-заняття' },
+];
+---
+<MarkdownPage id="parents">
+  <section slot="before" class="container-page pt-10" aria-label="Швидкі переходи">
+    <ul class="grid gap-4 sm:grid-cols-3">
+      {quick.map((q) => (
+        <li>
+          <a href={q.href} class="card flex h-full items-center gap-4 p-5 hover:border-brand-400">
+            <span class="grid size-12 shrink-0 place-items-center rounded-2xl bg-brand-50 text-brand-800"><Icon name={q.icon} /></span>
+            <span><span class="block font-display text-lg font-bold text-brand-950">{q.title}</span><span class="block text-sm text-muted">{q.text}</span></span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</MarkdownPage>

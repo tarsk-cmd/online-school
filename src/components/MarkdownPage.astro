@@ -1,0 +1,31 @@
+---
+/** Сторінка з тексту content/pages/<id>.md (юридичні сторінки, «Для батьків», «Репетиторство»). */
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from './PageHeader.astro';
+import CtaBanner from './CtaBanner.astro';
+
+interface Props { id: string; cta?: boolean; eyebrow?: string; wide?: boolean }
+const { id, cta = true, eyebrow, wide = false } = Astro.props;
+const page = await getEntry('pages', id);
+if (!page) throw new Error(`Немає файлу content/pages/${id}.md`);
+const { Content } = await render(page);
+const { title, description, updated, needsLegalReview } = page.data;
+---
+<BaseLayout title={title} description={description} lang="uk">
+  <PageHeader lang="uk" title={title} lead={description} eyebrow={eyebrow} crumbs={[{ label: title }]} />
+  <slot name="before" />
+  <section class="section pt-10">
+    <div class:list={['container-page', !wide && 'max-w-4xl']}>
+      {needsLegalReview && (
+        <p class="mb-8 rounded-2xl border-2 border-amber-400 bg-amber-50 p-4 font-semibold text-amber-950" role="note">
+          ⚠ Шаблон документа — потребує юридичної перевірки перед публікацією.
+        </p>
+      )}
+      <div class="prose-school"><Content /></div>
+      {updated && <p class="mt-10 text-sm text-muted">Остання редакція: {updated}</p>}
+    </div>
+  </section>
+  <slot />
+  {cta && <CtaBanner lang="uk" />}
+</BaseLayout>

@@ -1,0 +1,7 @@
+---
+import PricingView from '@/views/PricingView.astro';
+import type { Lang } from '@/i18n/ui';
+export const getStaticPaths = () => [{ params: { lang: 'en' } }, { params: { lang: 'pl' } }];
+const lang = Astro.params.lang as Lang;
+---
+<PricingView lang={lang} />

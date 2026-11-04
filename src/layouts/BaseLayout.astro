@@ -1,0 +1,67 @@
+---
+import '@/styles/global.css';
+import { LANG_NAMES, LOCALES, useTranslations, type Lang } from '@/i18n/ui';
+import { isFullyTranslated, localizedPath, stripLocale } from '@/i18n/routes';
+import { site } from '@/lib/site';
+import { l } from '@/lib/text';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  lang: Lang;
+  /** Сторінка-заглушка або службова — не індексувати пошуковиками */
+  noindex?: boolean;
+  ogType?: 'website' | 'article';
+}
+
+const { title, description, lang, noindex = false, ogType = 'website' } = Astro.props;
+const t = useTranslations(lang);
+const { path } = stripLocale(Astro.url.pathname);
+const siteName = l(site.fullName, lang);
+const fullTitle = title === siteName ? title : `${title} — ${siteName}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const alternates = isFullyTranslated(path)
+  ? LOCALES.map((code) => ({ code, href: new URL(localizedPath(code, path), Astro.site).href }))
+  : [];
+const favicon = localizedPath('uk', '/favicon.svg');
+---
+<!doctype html>
+<html lang={LANG_NAMES[lang].htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical.href} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    {alternates.map((a) => <link rel="alternate" hreflang={LANG_NAMES[a.code].htmlLang} href={a.href} />)}
+    {alternates.length > 0 && <link rel="alternate" hreflang="x-default" href={alternates[0].href} />}
+    <link rel="icon" href={favicon} type="image/svg+xml" />
+    <meta name="theme-color" content="#22399b" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content={LANG_NAMES[lang].og} />
+    <meta property="og:image" content={new URL(localizedPath('uk', '/og-image.png'), Astro.site).href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="sitemap" href={localizedPath('uk', '/sitemap-index.xml')} />
+    <slot name="head" />
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <a
+      href="#main"
+      class="sr-only z-50 rounded-lg bg-brand-800 px-4 py-3 font-semibold text-white focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
+    >{t('skip.toMain')}</a>
+    <Header lang={lang} path={path} />
+    <main id="main" class="grow" tabindex="-1">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+  </body>
+</html>

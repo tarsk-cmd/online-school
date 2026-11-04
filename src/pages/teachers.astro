@@ -1,0 +1,28 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { useTranslations } from '@/i18n/ui';
+import { getTeachers } from '@/lib/content';
+import PageHeader from '@/components/PageHeader.astro';
+import TeacherCard from '@/components/TeacherCard.astro';
+import CtaBanner from '@/components/CtaBanner.astro';
+
+const lang = 'uk' as const;
+const t = useTranslations(lang);
+const teachers = await getTeachers();
+const lead = 'Ми запрошуємо педагогів, які не лише знають предмет, а й уміють пояснювати дітям.';
+---
+<BaseLayout title={t('nav.teachers')} description={lead} lang={lang}>
+  <PageHeader lang={lang} title={t('nav.teachers')} lead={lead} crumbs={[{ label: t('nav.teachers') }]} />
+  <section class="section pt-10">
+    <div class="container-page">
+      <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {teachers.map((tc) => <li><TeacherCard teacher={tc} lang={lang} headingLevel="h2" /></li>)}
+      </ul>
+      <div class="mt-12 rounded-2xl bg-brand-50 p-6 sm:p-8">
+        <h2 class="text-2xl font-bold">Хочете викладати в нас?</h2>
+        <p class="mt-2 max-w-2xl text-muted">Ми шукаємо викладачів шахів, мов, математики, музики та IT, які люблять працювати з дітьми. Напишіть нам у месенджер або на пошту, розкажіть про свій досвід.</p>
+      </div>
+    </div>
+  </section>
+  <CtaBanner lang={lang} />
+</BaseLayout>
