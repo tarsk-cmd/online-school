@@ -21,6 +21,8 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
+      // Заглушки «сторінка перекладається» не потрапляють у карту сайту
+      filter: (page) => !/\/(en|pl)\/(exams|tutoring|teachers|parents|blog|privacy|terms)\/$/.test(page),
       i18n: { defaultLocale: 'uk', locales: { uk: 'uk-UA', en: 'en', pl: 'pl-PL' } },
     }),
   ],
