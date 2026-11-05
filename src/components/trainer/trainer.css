@@ -410,11 +410,12 @@
   line-height: 1.2;
 }
 .tr-lv-sub {
+  white-space: nowrap;
   font-size: 0.85rem;
   color: var(--tr-muted);
 }
 .tr-lv-stars {
-  font-size: 1rem;
+  font-size: 0.9rem;
   letter-spacing: 0.05em;
   color: #e0a800;
   white-space: nowrap;

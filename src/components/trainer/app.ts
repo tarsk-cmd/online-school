@@ -346,6 +346,12 @@ export class TrainerApp {
     window.setTimeout(() => el.classList.remove('is-on'), 2600);
   }
 
+  /** Прокрутити до початку тренажера (під липку шапку сайту). */
+  private toTop() {
+    const y = this.root.getBoundingClientRect().top + window.scrollY - (this.cfg.embed ? 0 : 72);
+    if (window.scrollY > y) window.scrollTo({ top: Math.max(0, y) });
+  }
+
   private destroyBoard() {
     this.clearTimers();
     if (this.board) {
@@ -375,6 +381,7 @@ export class TrainerApp {
     this.destroyBoard();
     this.st = null;
     this.backBtn.hidden = true;
+    this.toTop();
     const { t } = this;
     const all = this.allLevels();
     const done = all.filter((l) => this.isDone(l.id)).length;
@@ -459,6 +466,7 @@ export class TrainerApp {
     if (!level || !this.levelUnlocked(level)) return;
     this.destroyBoard();
     this.backBtn.hidden = false;
+    this.toTop();
     const { t } = this;
     this.st = {
       level,
@@ -1078,7 +1086,8 @@ export class TrainerApp {
         ${this.ctaHtml()}
       </div>`;
     play('success');
-    this.view.querySelector<HTMLElement>('[data-act="level"]')?.focus();
+    this.toTop();
+    this.view.querySelector<HTMLElement>('[data-act="level"]')?.focus({ preventScroll: true });
   }
 }
 
