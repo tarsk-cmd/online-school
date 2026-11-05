@@ -1,0 +1,457 @@
+{
+  "$comment": "Режим 1 «Як ходять фігури». Кожен рівень — одна фігура; tasks — міні-завдання «збери всі зірочки». Поля: start, stars, food (чорні пішаки, яких можна з'їсти), blockers (свої пішаки-перешкоди), enemies (чорні сторожі, напр. 'nd5'), hint. Мінімальну кількість ходів рахує програма сама.",
+  "levels": [
+    {
+      "id": "rook",
+      "piece": "r",
+      "title": {
+        "uk": "Тура",
+        "pl": "Wieża"
+      },
+      "intro": {
+        "uk": "Тура ходить по прямій: уперед, назад, ліворуч і праворуч — на скільки завгодно полів. Перестрибувати через інші фігури тура не вміє.",
+        "pl": "Wieża chodzi po prostej: do przodu, do tyłu, w lewo i w prawo — o dowolną liczbę pól. Przeskakiwać przez inne bierki wieża nie umie."
+      },
+      "tasks": [
+        {
+          "start": "d1",
+          "stars": [
+            "d6"
+          ],
+          "hint": {
+            "uk": "Іди прямо вгору!",
+            "pl": "Idź prosto w górę!"
+          }
+        },
+        {
+          "start": "a1",
+          "stars": [
+            "a5",
+            "e5"
+          ],
+          "hint": {
+            "uk": "Спершу вгору, потім праворуч.",
+            "pl": "Najpierw w górę, potem w prawo."
+          }
+        },
+        {
+          "start": "h1",
+          "stars": [
+            "h8",
+            "a8",
+            "a1"
+          ],
+          "hint": {
+            "uk": "Обійди дошку по краю, як по доріжці стадіону.",
+            "pl": "Obejdź szachownicę brzegiem, jak bieżnią na stadionie."
+          }
+        },
+        {
+          "start": "a1",
+          "stars": [
+            "c8"
+          ],
+          "blockers": [
+            "a4",
+            "c2"
+          ],
+          "hint": {
+            "uk": "Пішаки заважають. Знайди обхідну дорогу: спершу на b1.",
+            "pl": "Pionki przeszkadzają. Znajdź objazd: najpierw na b1."
+          }
+        },
+        {
+          "start": "b2",
+          "stars": [
+            "b8",
+            "h8",
+            "h3"
+          ],
+          "enemies": [
+            "nd5"
+          ],
+          "hint": {
+            "uk": "Не ставай на поля, які б'є чорний кінь (вони позначені). Пройти повз них можна!",
+            "pl": "Nie stawaj na polach, które atakuje czarny skoczek (są zaznaczone). Przejść obok nich można!"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bishop",
+      "piece": "b",
+      "title": {
+        "uk": "Слон",
+        "pl": "Goniec"
+      },
+      "intro": {
+        "uk": "Слон ходить по діагоналі — навскіс, на скільки завгодно полів. Він завжди лишається на полях свого кольору: білопольний слон ніколи не стане на темне поле.",
+        "pl": "Goniec chodzi po przekątnej — na ukos, o dowolną liczbę pól. Zawsze zostaje na polach swojego koloru: goniec białopolowy nigdy nie stanie na ciemnym polu."
+      },
+      "tasks": [
+        {
+          "start": "c1",
+          "stars": [
+            "f4"
+          ],
+          "hint": {
+            "uk": "Іди навскіс угору праворуч.",
+            "pl": "Idź na ukos w górę w prawo."
+          }
+        },
+        {
+          "start": "c1",
+          "stars": [
+            "a3",
+            "e7"
+          ],
+          "hint": {
+            "uk": "Спершу ліворуч навскіс, потім далеко праворуч.",
+            "pl": "Najpierw na ukos w lewo, potem daleko w prawo."
+          }
+        },
+        {
+          "start": "f1",
+          "stars": [
+            "h3",
+            "c8",
+            "a6"
+          ],
+          "hint": {
+            "uk": "Усі зірочки на світлих полях — як і твій слон.",
+            "pl": "Wszystkie gwiazdki są na jasnych polach — tak jak twój goniec."
+          }
+        },
+        {
+          "start": "c1",
+          "stars": [
+            "a3",
+            "f8"
+          ],
+          "blockers": [
+            "d2"
+          ],
+          "hint": {
+            "uk": "Дорогу праворуч закрив пішак. Почни з поля b2.",
+            "pl": "Drogę w prawo zamknął pionek. Zacznij od pola b2."
+          }
+        },
+        {
+          "start": "e4",
+          "stars": [
+            "b7",
+            "h7",
+            "g2"
+          ],
+          "enemies": [
+            "rd8"
+          ],
+          "hint": {
+            "uk": "Чорна тура б'є всю вертикаль d і всю восьму горизонталь.",
+            "pl": "Czarna wieża atakuje całą linię d i całą ósmą linię."
+          }
+        }
+      ]
+    },
+    {
+      "id": "queen",
+      "piece": "q",
+      "title": {
+        "uk": "Ферзь",
+        "pl": "Hetman"
+      },
+      "intro": {
+        "uk": "Ферзь — найсильніша фігура. Він ходить і як тура (по прямій), і як слон (по діагоналі) — на скільки завгодно полів.",
+        "pl": "Hetman to najsilniejsza bierka. Chodzi i jak wieża (po prostej), i jak goniec (po przekątnej) — o dowolną liczbę pól."
+      },
+      "tasks": [
+        {
+          "start": "d1",
+          "stars": [
+            "d7",
+            "h3"
+          ],
+          "hint": {
+            "uk": "Ферзь уміє і прямо, і навскіс.",
+            "pl": "Hetman umie i prosto, i na ukos."
+          }
+        },
+        {
+          "start": "a1",
+          "stars": [
+            "h8",
+            "h1",
+            "a8"
+          ],
+          "hint": {
+            "uk": "Найдовша діагональ — з кута в кут!",
+            "pl": "Najdłuższa przekątna — z rogu do rogu!"
+          }
+        },
+        {
+          "start": "d4",
+          "stars": [
+            "d8",
+            "h6",
+            "a7"
+          ],
+          "blockers": [
+            "d6",
+            "f6"
+          ],
+          "hint": {
+            "uk": "Прямо вгору не пройти — пошукай діагональ.",
+            "pl": "Prosto w górę nie przejdziesz — poszukaj przekątnej."
+          }
+        },
+        {
+          "start": "e1",
+          "stars": [
+            "a4",
+            "h5",
+            "e8"
+          ],
+          "enemies": [
+            "nc6",
+            "bf6"
+          ],
+          "hint": {
+            "uk": "Кінь і слон сторожать поля. Ставай лише на безпечні.",
+            "pl": "Skoczek i goniec pilnują pól. Stawaj tylko na bezpiecznych."
+          }
+        }
+      ]
+    },
+    {
+      "id": "king",
+      "piece": "k",
+      "title": {
+        "uk": "Король",
+        "pl": "Król"
+      },
+      "intro": {
+        "uk": "Король ходить лише на одне поле в будь-який бік. Він найважливіший: королеві не можна ставати на поле, яке б'є чужа фігура.",
+        "pl": "Król chodzi tylko o jedno pole w dowolną stronę. Jest najważniejszy: król nie może stanąć na polu, które atakuje bierka przeciwnika."
+      },
+      "tasks": [
+        {
+          "start": "e1",
+          "stars": [
+            "e3"
+          ],
+          "hint": {
+            "uk": "Крок за кроком угору.",
+            "pl": "Krok po kroku w górę."
+          }
+        },
+        {
+          "start": "e4",
+          "stars": [
+            "g6",
+            "c6"
+          ],
+          "hint": {
+            "uk": "Король може ходити навскіс — так швидше.",
+            "pl": "Król może chodzić na ukos — tak jest szybciej."
+          }
+        },
+        {
+          "start": "a1",
+          "stars": [
+            "d4",
+            "f2"
+          ],
+          "hint": {
+            "uk": "Іди навскіс до центру.",
+            "pl": "Idź na ukos do środka."
+          }
+        },
+        {
+          "start": "e1",
+          "stars": [
+            "e6",
+            "g4"
+          ],
+          "enemies": [
+            "bc6"
+          ],
+          "hint": {
+            "uk": "Чорний слон б'є діагоналі. Король туди не стане — обійди їх.",
+            "pl": "Czarny goniec atakuje przekątne. Król tam nie stanie — obejdź je."
+          }
+        },
+        {
+          "start": "a1",
+          "stars": [
+            "a8"
+          ],
+          "enemies": [
+            "nb5"
+          ],
+          "hint": {
+            "uk": "Кінь б'є поля буквою «Г». Король туди не стане — шукай безпечну стежку.",
+            "pl": "Skoczek atakuje pola „literą L”. Król tam nie stanie — szukaj bezpiecznej ścieżki."
+          }
+        }
+      ]
+    },
+    {
+      "id": "knight",
+      "piece": "n",
+      "title": {
+        "uk": "Кінь",
+        "pl": "Skoczek"
+      },
+      "intro": {
+        "uk": "Кінь ходить буквою «Г»: два поля прямо й одне вбік. Це єдина фігура, яка вміє перестрибувати через інші!",
+        "pl": "Skoczek chodzi „literą L”: dwa pola prosto i jedno w bok. To jedyna bierka, która umie przeskakiwać przez inne!"
+      },
+      "tasks": [
+        {
+          "start": "g1",
+          "stars": [
+            "f3"
+          ],
+          "hint": {
+            "uk": "Два поля вгору й одне ліворуч.",
+            "pl": "Dwa pola w górę i jedno w lewo."
+          }
+        },
+        {
+          "start": "g1",
+          "stars": [
+            "h3",
+            "f4"
+          ],
+          "hint": {
+            "uk": "Кінь завжди стрибає на поле іншого кольору.",
+            "pl": "Skoczek zawsze skacze na pole innego koloru."
+          }
+        },
+        {
+          "start": "b1",
+          "stars": [
+            "b3",
+            "c5"
+          ],
+          "hint": {
+            "uk": "До сусіднього поля коню треба два стрибки.",
+            "pl": "Do sąsiedniego pola skoczek potrzebuje dwóch skoków."
+          }
+        },
+        {
+          "start": "b1",
+          "stars": [
+            "c3",
+            "e4",
+            "c5"
+          ],
+          "blockers": [
+            "a2",
+            "b2",
+            "c2",
+            "d2"
+          ],
+          "hint": {
+            "uk": "Пішаки коню не заважають — стрибай через них!",
+            "pl": "Pionki skoczkowi nie przeszkadzają — skacz przez nie!"
+          }
+        },
+        {
+          "start": "b1",
+          "stars": [
+            "f3",
+            "e6"
+          ],
+          "enemies": [
+            "pd5",
+            "pf6"
+          ],
+          "hint": {
+            "uk": "Чорні пішаки б'ють навскіс униз. Не ставай під їхній удар.",
+            "pl": "Czarne pionki biją po skosie w dół. Nie stawaj pod ich atak."
+          }
+        }
+      ]
+    },
+    {
+      "id": "pawn",
+      "piece": "p",
+      "title": {
+        "uk": "Пішак",
+        "pl": "Pionek"
+      },
+      "intro": {
+        "uk": "Пішак ходить лише вперед на одне поле. З початкового місця може стрибнути на два. А б'є пішак навскіс уперед. Дійшовши до кінця дошки, пішак стає ферзем!",
+        "pl": "Pionek chodzi tylko do przodu o jedno pole. Z pozycji startowej może skoczyć o dwa. A bije pionek po skosie do przodu. Gdy dojdzie do końca szachownicy, zostaje hetmanem!"
+      },
+      "tasks": [
+        {
+          "start": "e2",
+          "stars": [
+            "e4",
+            "e5"
+          ],
+          "hint": {
+            "uk": "Перший хід пішака може бути на два поля.",
+            "pl": "Pierwszy ruch pionka może być o dwa pola."
+          }
+        },
+        {
+          "start": "d2",
+          "stars": [
+            "e5"
+          ],
+          "food": [
+            "e3"
+          ],
+          "hint": {
+            "uk": "З'їж чорного пішака навскіс — і йди вперед.",
+            "pl": "Zbij czarnego pionka po skosie — i idź naprzód."
+          }
+        },
+        {
+          "start": "c2",
+          "stars": [
+            "d5"
+          ],
+          "food": [
+            "d3"
+          ],
+          "blockers": [
+            "c3"
+          ],
+          "hint": {
+            "uk": "Прямо не пройти, але можна бити навскіс.",
+            "pl": "Prosto nie przejdziesz, ale można bić po skosie."
+          }
+        },
+        {
+          "start": "b4",
+          "stars": [
+            "e7"
+          ],
+          "food": [
+            "c5",
+            "d6"
+          ],
+          "hint": {
+            "uk": "Їж пішаків навскіс по черзі — сходинками.",
+            "pl": "Bij pionki po skosie po kolei — schodkami."
+          }
+        },
+        {
+          "start": "g6",
+          "stars": [
+            "g8",
+            "a2"
+          ],
+          "hint": {
+            "uk": "Доведи пішака до кінця — він стане ферзем і дістане далеку зірочку!",
+            "pl": "Doprowadź pionka do końca — zostanie hetmanem i dosięgnie dalekiej gwiazdki!"
+          }
+        }
+      ]
+    }
+  ]
+}

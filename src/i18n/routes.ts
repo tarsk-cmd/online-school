@@ -36,8 +36,12 @@ export function stripLocale(pathname: string): { lang: Lang; path: string } {
 }
 
 /** Куди вести перемикач мов: та сама сторінка, а якщо її немає в цій мові — відповідний розділ. */
+/** Мови, якими є шаховий тренажер (/trener/). */
+export const TRAINER_LANGS: readonly Lang[] = ['uk', 'pl'];
+
 export function switchTarget(path: string, target: Lang): string {
   if (path.startsWith('/404')) return localizedPath(target, '/');
+  if (path.startsWith('/trener/')) return localizedPath(target, TRAINER_LANGS.includes(target) ? '/trener/' : '/');
   if (target === DEFAULT_LANG || STATIC_PATHS.includes(path)) return localizedPath(target, path);
   if (path.startsWith('/courses/') || path.startsWith('/directions/')) return localizedPath(target, '/courses/');
   if (path.startsWith('/blog/')) return localizedPath(target, '/blog/');

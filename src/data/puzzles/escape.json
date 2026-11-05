@@ -1,0 +1,257 @@
+{
+  "$comment": "Режим 3 «Втечі від шаху». Сторона, що ходить, під шахом. Зараховується БУДЬ-ЯКИЙ легальний хід. solution — один із правильних ходів (для підказки).",
+  "puzzles": [
+    {
+      "id": "x01",
+      "fen": "4r1k1/8/8/8/8/8/8/4K3 w - - 0 1",
+      "toMove": "w",
+      "solution": "Kd2",
+      "hint": {
+        "uk": "Відійди королем убік — геть із вертикалі e.",
+        "pl": "Odejdź królem w bok — z dala od linii e."
+      },
+      "explanation": {
+        "uk": "Король пішов із лінії тури. Уздовж тієї ж лінії (e2) тікати не можна.",
+        "pl": "Król zszedł z linii wieży. Uciekać wzdłuż tej samej linii (e2) nie wolno."
+      }
+    },
+    {
+      "id": "x02",
+      "fen": "6k1/5ppp/8/8/8/8/5PPP/R3r1K1 w - - 0 1",
+      "toMove": "w",
+      "solution": "Rxe1",
+      "hint": {
+        "uk": "Королю нікуди йти. Може, хтось заб'є нападника?",
+        "pl": "Król nie ma dokąd iść. Może ktoś zbije napastnika?"
+      },
+      "explanation": {
+        "uk": "Тура a1 забрала чорну туру, яка давала шах.",
+        "pl": "Wieża a1 zbiła czarną wieżę, która dawała szacha."
+      }
+    },
+    {
+      "id": "x03",
+      "fen": "rnbqk1nr/pppp1ppp/8/4p3/1b1P4/8/PPP1PPPP/RNBQKBNR w KQkq - 1 3",
+      "toMove": "w",
+      "solution": "c3",
+      "hint": {
+        "uk": "Закрий короля: постав фігуру між слоном і королем.",
+        "pl": "Zasłoń króla: postaw bierkę między gońcem a królem."
+      },
+      "explanation": {
+        "uk": "Шах від слона можна закрити — пішаком c3, конем, слоном або ферзем на d2.",
+        "pl": "Szacha od gońca można zasłonić — pionkiem c3, skoczkiem, gońcem albo hetmanem na d2."
+      }
+    },
+    {
+      "id": "x04",
+      "fen": "rnbqkb1r/pppppppp/8/8/8/5n2/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "toMove": "w",
+      "solution": "gxf3",
+      "hint": {
+        "uk": "Від коня не закриєшся. Але його можна з'їсти!",
+        "pl": "Przed skoczkiem nie da się zasłonić. Ale można go zbić!"
+      },
+      "explanation": {
+        "uk": "Шах конем не можна закрити — лише втекти або забрати коня. Пішак його з'їв.",
+        "pl": "Szacha skoczkiem nie można zasłonić — tylko uciec albo zbić skoczka. Pionek go zbił."
+      }
+    },
+    {
+      "id": "x05",
+      "fen": "6k1/8/8/8/8/7q/6P1/7K w - - 0 1",
+      "toMove": "w",
+      "solution": "gxh3",
+      "hint": {
+        "uk": "Пішак g2 б'є навскіс…",
+        "pl": "Pionek g2 bije po skosie…"
+      },
+      "explanation": {
+        "uk": "Ферзь стояв без захисту — пішак його з'їв. Рятувало й Kg1.",
+        "pl": "Hetman stał bez obrony — pionek go zbił. Ratował też ruch Kg1."
+      }
+    },
+    {
+      "id": "x06",
+      "fen": "rnbqkbnr/ppp1pppp/8/1B1p4/4P3/8/PPPP1PPP/RNBQK1NR b KQkq - 1 2",
+      "toMove": "b",
+      "solution": "c6",
+      "hint": {
+        "uk": "Постав щось між слоном b5 і королем.",
+        "pl": "Postaw coś między gońcem b5 a królem."
+      },
+      "explanation": {
+        "uk": "Шах закрито! Підходили також Nc6, Nd7, Bd7 і Qd7. А от королем на d7 не можна — це поле теж б'є слон.",
+        "pl": "Szach zasłonięty! Pasowały też Sc6, Sd7, Gd7 i Hd7. Ale królem na d7 nie wolno — to pole też atakuje goniec."
+      }
+    },
+    {
+      "id": "x07",
+      "fen": "4r1k1/8/8/8/1b6/8/R7/4K3 w - - 0 1",
+      "toMove": "w",
+      "solution": "Kf1",
+      "hint": {
+        "uk": "Подвійний шах! Закритися від двох фігур одразу неможливо — ходи королем.",
+        "pl": "Podwójny szach! Nie da się zasłonić przed dwiema bierkami naraz — rusz się królem."
+      },
+      "explanation": {
+        "uk": "При подвійному шаху рятує лише хід королем.",
+        "pl": "Przy podwójnym szachu ratuje tylko ruch królem."
+      }
+    },
+    {
+      "id": "x08",
+      "fen": "6k1/8/8/8/8/8/6q1/6K1 w - - 0 1",
+      "toMove": "w",
+      "solution": "Kxg2",
+      "hint": {
+        "uk": "Ферзь підійшов зовсім близько… і його ніхто не захищає.",
+        "pl": "Hetman podszedł bardzo blisko… i nikt go nie broni."
+      },
+      "explanation": {
+        "uk": "Король може сам забрати фігуру, якщо її ніхто не захищає.",
+        "pl": "Król może sam zbić bierkę, jeśli nikt jej nie broni."
+      }
+    },
+    {
+      "id": "x09",
+      "fen": "6k1/5ppp/7N/8/8/8/5PPP/6K1 b - - 0 1",
+      "toMove": "b",
+      "solution": "gxh6",
+      "hint": {
+        "uk": "Кінь стоїть на h6. Хто з чорних може його з'їсти?",
+        "pl": "Skoczek stoi na h6. Kto z czarnych może go zbić?"
+      },
+      "explanation": {
+        "uk": "Пішак g7 з'їв коня. Також можна було піти королем на f8 або h8.",
+        "pl": "Pionek g7 zbił skoczka. Można było też pójść królem na f8 albo h8."
+      }
+    },
+    {
+      "id": "x10",
+      "fen": "6k1/8/8/8/8/8/PR6/K6r w - - 0 1",
+      "toMove": "w",
+      "solution": "Rb1",
+      "hint": {
+        "uk": "Королю нікуди піти. Закрий його турою.",
+        "pl": "Król nie ma dokąd iść. Zasłoń go wieżą."
+      },
+      "explanation": {
+        "uk": "Тура стала на b1 і закрила короля від чорної тури.",
+        "pl": "Wieża stanęła na b1 i zasłoniła króla przed czarną wieżą."
+      }
+    },
+    {
+      "id": "x11",
+      "fen": "6k1/8/8/8/8/8/5bPP/5RK1 w - - 0 1",
+      "toMove": "w",
+      "solution": "Rxf2",
+      "hint": {
+        "uk": "Слон f2 без захисту.",
+        "pl": "Goniec f2 jest bez obrony."
+      },
+      "explanation": {
+        "uk": "Слона можна було забрати турою або королем, а можна й піти на h1.",
+        "pl": "Gońca można było zbić wieżą albo królem, a można też było pójść na h1."
+      }
+    },
+    {
+      "id": "x12",
+      "fen": "6k1/8/8/2p5/3K4/8/8/8 w - - 0 1",
+      "toMove": "w",
+      "solution": "Kxc5",
+      "hint": {
+        "uk": "Чорний пішак б'є навскіс униз. Відійди або з'їж його.",
+        "pl": "Czarny pionek bije po skosie w dół. Odejdź albo go zbij."
+      },
+      "explanation": {
+        "uk": "Король з'їв пішака, що давав шах. Тікати теж можна було.",
+        "pl": "Król zbił pionka, który dawał szacha. Uciec też było można."
+      }
+    },
+    {
+      "id": "x13",
+      "fen": "6k1/5ppp/8/8/8/8/4BPPP/1q4K1 w - - 0 1",
+      "toMove": "w",
+      "solution": "Bf1",
+      "hint": {
+        "uk": "Королю тікати нікуди. Закрий першу горизонталь слоном.",
+        "pl": "Król nie ma dokąd uciec. Zasłoń pierwszą linię gońcem."
+      },
+      "explanation": {
+        "uk": "Слон закрив короля на f1 (або d1). Пішаки f2, g2, h2 не давали королю втекти.",
+        "pl": "Goniec zasłonił króla na f1 (albo d1). Pionki f2, g2, h2 nie pozwalały królowi uciec."
+      }
+    },
+    {
+      "id": "x14",
+      "fen": "6k1/8/5n2/8/4K3/8/8/8 w - - 0 1",
+      "toMove": "w",
+      "solution": "Ke3",
+      "hint": {
+        "uk": "Від коня можна лише втекти. Але не на поле, яке він б'є!",
+        "pl": "Przed skoczkiem można tylko uciec. Ale nie na pole, które on atakuje!"
+      },
+      "explanation": {
+        "uk": "Король утік. Поля d5, g4 теж б'є кінь — туди не можна.",
+        "pl": "Król uciekł. Pola d5 i g4 też atakuje skoczek — tam nie wolno."
+      }
+    },
+    {
+      "id": "x15",
+      "fen": "R5k1/5ppp/8/8/8/8/3r1PPP/6K1 b - - 0 1",
+      "toMove": "b",
+      "solution": "Rd8",
+      "hint": {
+        "uk": "Королю заважають свої пішаки. Чи може тура прикрити?",
+        "pl": "Królowi przeszkadzają własne pionki. Czy wieża może go zasłonić?"
+      },
+      "explanation": {
+        "uk": "Тура d8 закрила короля. Інакше був би мат на останній горизонталі!",
+        "pl": "Wieża d8 zasłoniła króla. Inaczej byłby mat na ostatniej linii!"
+      }
+    },
+    {
+      "id": "x16",
+      "fen": "rnbq1bnr/ppppkppp/8/4p1B1/4P3/3P4/PPP2PPP/RN1QKBNR b KQ - 2 3",
+      "toMove": "b",
+      "solution": "Nf6",
+      "hint": {
+        "uk": "Слон g5 б'є навскіс. Закрий діагональ на f6.",
+        "pl": "Goniec g5 atakuje po skosie. Zasłoń przekątną na f6."
+      },
+      "explanation": {
+        "uk": "Кінь f6 (або пішак f6) закрив короля. Можна було й відійти королем.",
+        "pl": "Skoczek f6 (albo pionek f6) zasłonił króla. Można było też odejść królem."
+      }
+    },
+    {
+      "id": "x17",
+      "fen": "6k1/8/8/8/8/2B5/8/r3K3 w - - 0 1",
+      "toMove": "w",
+      "solution": "Bxa1",
+      "hint": {
+        "uk": "Слон c3 дивиться на кут a1…",
+        "pl": "Goniec c3 patrzy na róg a1…"
+      },
+      "explanation": {
+        "uk": "Слон з'їв туру, що давала шах. Можна було й відійти королем з першої горизонталі.",
+        "pl": "Goniec zbił wieżę, która dawała szacha. Można było też zejść królem z pierwszej linii."
+      }
+    },
+    {
+      "id": "x18",
+      "fen": "rnb1kbnr/pppp1ppp/8/4p3/4P2q/5P2/PPPP2PP/RNBQKBNR w KQkq - 1 3",
+      "toMove": "w",
+      "solution": "g3",
+      "hint": {
+        "uk": "Ферзь h4 б'є по діагоналі. Чим її закрити?",
+        "pl": "Hetman h4 atakuje po przekątnej. Czym ją zasłonić?"
+      },
+      "explanation": {
+        "uk": "Пішак g3 закрив діагональ. Рятував також хід Ke2.",
+        "pl": "Pionek g3 zasłonił przekątną. Ratował też ruch Ke2."
+      }
+    }
+  ]
+}

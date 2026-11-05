@@ -1,0 +1,494 @@
+{
+  "$comment": "Режим 4 «Мат в 1 хід». difficulty: easy | medium | hard. Зараховується БУДЬ-ЯКИЙ хід, що ставить мат; solution — авторський розв'язок (скрипт перевіряє, що це мат).",
+  "puzzles": [
+    {
+      "id": "m01",
+      "difficulty": "easy",
+      "fen": "6k1/5ppp/8/8/8/8/5PPP/R5K1 w - - 0 1",
+      "toMove": "w",
+      "solution": "Ra8#",
+      "hint": {
+        "uk": "Чорному королю заважають тікати власні пішаки.",
+        "pl": "Czarnemu królowi przeszkadzają uciekać jego własne pionki."
+      },
+      "explanation": {
+        "uk": "Мат на останній горизонталі: пішаки f7, g7, h7 закрили королю всі втечі.",
+        "pl": "Mat na ostatniej linii: pionki f7, g7, h7 zamknęły królowi wszystkie ucieczki."
+      }
+    },
+    {
+      "id": "m02",
+      "difficulty": "easy",
+      "fen": "6k1/5ppp/8/8/8/8/5PPP/3Q2K1 w - - 0 1",
+      "toMove": "w",
+      "solution": "Qd8#",
+      "hint": {
+        "uk": "Ферзь теж уміє бити по горизонталі.",
+        "pl": "Hetman też umie atakować po linii poziomej."
+      },
+      "explanation": {
+        "uk": "Ферзь на d8 — і королю нікуди втекти.",
+        "pl": "Hetman na d8 — i król nie ma dokąd uciec."
+      }
+    },
+    {
+      "id": "m03",
+      "difficulty": "easy",
+      "fen": "7k/6pp/8/8/8/8/6PP/4R1K1 w - - 0 1",
+      "toMove": "w",
+      "solution": "Re8#",
+      "hint": {
+        "uk": "Тура йде на восьму горизонталь.",
+        "pl": "Wieża idzie na ósmą linię."
+      },
+      "explanation": {
+        "uk": "Тура e8 б'є g8 і h8, а пішаки g7 і h7 заважають королю.",
+        "pl": "Wieża e8 atakuje g8 i h8, a pionki g7 i h7 przeszkadzają królowi."
+      }
+    },
+    {
+      "id": "m04",
+      "difficulty": "easy",
+      "fen": "3r2k1/5ppp/8/8/8/8/5PPP/6K1 b - - 0 1",
+      "toMove": "b",
+      "solution": "Rd1#",
+      "hint": {
+        "uk": "Тепер ходять чорні. Білий король теж сховався за пішаками…",
+        "pl": "Teraz ruch czarnych. Biały król też schował się za pionkami…"
+      },
+      "explanation": {
+        "uk": "Той самий мат на останній горизонталі — тільки чорними.",
+        "pl": "Ten sam mat na ostatniej linii — tylko czarnymi."
+      }
+    },
+    {
+      "id": "m05",
+      "difficulty": "easy",
+      "fen": "7k/R7/8/8/8/8/8/1R4K1 w - - 0 1",
+      "toMove": "w",
+      "solution": "Rb8#",
+      "hint": {
+        "uk": "Одна тура вже тримає сьому горизонталь.",
+        "pl": "Jedna wieża już trzyma siódmą linię."
+      },
+      "explanation": {
+        "uk": "«Лінійний мат»: тура a7 тримає сьому горизонталь, тура b8 б'є восьму.",
+        "pl": "„Mat liniowy”: wieża a7 trzyma siódmą linię, wieża b8 atakuje ósmą."
+      }
+    },
+    {
+      "id": "m06",
+      "difficulty": "easy",
+      "fen": "4k3/8/4K3/8/8/8/8/7Q w - - 0 1",
+      "toMove": "w",
+      "solution": "Qh8#",
+      "hint": {
+        "uk": "Білий король уже забрав поля сьомої горизонталі.",
+        "pl": "Biały król już zajął pola siódmej linii."
+      },
+      "explanation": {
+        "uk": "Ферзь б'є восьму горизонталь, а білий король — поля d7, e7, f7.",
+        "pl": "Hetman atakuje ósmą linię, a biały król — pola d7, e7, f7."
+      }
+    },
+    {
+      "id": "m07",
+      "difficulty": "easy",
+      "fen": "k7/8/1K6/8/8/8/8/7R w - - 0 1",
+      "toMove": "w",
+      "solution": "Rh8#",
+      "hint": {
+        "uk": "Король у кутку. Тура — на восьму!",
+        "pl": "Król jest w rogu. Wieża — na ósmą!"
+      },
+      "explanation": {
+        "uk": "Тура б'є восьму горизонталь, а білий король тримає a7 і b7.",
+        "pl": "Wieża atakuje ósmą linię, a biały król trzyma a7 i b7."
+      }
+    },
+    {
+      "id": "m08",
+      "difficulty": "easy",
+      "fen": "6k1/5ppp/8/8/8/8/1Q3PPP/6K1 w - - 0 1",
+      "toMove": "w",
+      "solution": "Qb8#",
+      "hint": {
+        "uk": "Ферзь може піти прямо вгору.",
+        "pl": "Hetman może pójść prosto w górę."
+      },
+      "explanation": {
+        "uk": "Ферзь b8 — мат на останній горизонталі.",
+        "pl": "Hetman b8 — mat na ostatniej linii."
+      }
+    },
+    {
+      "id": "m09",
+      "difficulty": "easy",
+      "fen": "6k1/1R6/8/8/8/8/8/Q5K1 w - - 0 1",
+      "toMove": "w",
+      "solution": "Qa8#",
+      "hint": {
+        "uk": "Тура вже тримає сьому горизонталь — ферзю лишається восьма.",
+        "pl": "Wieża już trzyma siódmą linię — hetmanowi zostaje ósma."
+      },
+      "explanation": {
+        "uk": "Тура b7 закрила втечі на сьому горизонталь, ферзь б'є восьму.",
+        "pl": "Wieża b7 zamknęła ucieczki na siódmą linię, hetman atakuje ósmą."
+      }
+    },
+    {
+      "id": "m10",
+      "difficulty": "easy",
+      "fen": "6k1/5ppp/8/8/8/8/q4PPP/6K1 b - - 0 1",
+      "toMove": "b",
+      "solution": "Qa1#",
+      "hint": {
+        "uk": "Ходять чорні. Перша горизонталь білих не захищена.",
+        "pl": "Ruch czarnych. Pierwsza linia białych nie jest broniona."
+      },
+      "explanation": {
+        "uk": "Ферзь на першій горизонталі — білий король замкнений своїми пішаками.",
+        "pl": "Hetman na pierwszej linii — biały król jest zamknięty swoimi pionkami."
+      }
+    },
+    {
+      "id": "m11",
+      "difficulty": "easy",
+      "fen": "8/8/8/k7/8/6K1/1R6/7R w - - 0 1",
+      "toMove": "w",
+      "solution": "Ra1#",
+      "hint": {
+        "uk": "Тура b2 тримає вертикаль b. Друга тура — на край!",
+        "pl": "Wieża b2 trzyma linię b. Druga wieża — na brzeg!"
+      },
+      "explanation": {
+        "uk": "Тура a1 б'є вертикаль a, тура b2 — вертикаль b. Королю нікуди.",
+        "pl": "Wieża a1 atakuje linię a, wieża b2 — linię b. Król nie ma dokąd iść."
+      }
+    },
+    {
+      "id": "m12",
+      "difficulty": "easy",
+      "fen": "8/8/8/8/8/1K6/7R/k7 w - - 0 1",
+      "toMove": "w",
+      "solution": "Rh1#",
+      "hint": {
+        "uk": "Король у кутку, а білий король поруч допомагає.",
+        "pl": "Król jest w rogu, a biały król obok pomaga."
+      },
+      "explanation": {
+        "uk": "Тура б'є першу горизонталь, а король b3 забрав a2 і b2.",
+        "pl": "Wieża atakuje pierwszą linię, a król b3 zajął a2 i b2."
+      }
+    },
+    {
+      "id": "m13",
+      "difficulty": "easy",
+      "fen": "1k6/ppp5/8/8/8/8/5PPP/3R2K1 w - - 0 1",
+      "toMove": "w",
+      "solution": "Rd8#",
+      "hint": {
+        "uk": "Чорний король сховався за пішаками на ферзевому фланзі.",
+        "pl": "Czarny król schował się za pionkami na skrzydle hetmańskim."
+      },
+      "explanation": {
+        "uk": "Мат на останній горизонталі буває з будь-якого боку дошки.",
+        "pl": "Mat na ostatniej linii zdarza się po każdej stronie szachownicy."
+      }
+    },
+    {
+      "id": "m14",
+      "difficulty": "medium",
+      "fen": "r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 4 4",
+      "toMove": "w",
+      "solution": "Qxf7#",
+      "hint": {
+        "uk": "Найслабше поле чорних на початку гри — f7.",
+        "pl": "Najsłabsze pole czarnych na początku gry to f7."
+      },
+      "explanation": {
+        "uk": "Дитячий мат! Ферзь бере f7 під захистом слона c4.",
+        "pl": "Mat szewski! Hetman bije f7 pod osłoną gońca c4."
+      }
+    },
+    {
+      "id": "m15",
+      "difficulty": "medium",
+      "fen": "rnbqkbnr/pppp1ppp/8/4p3/6P1/5P2/PPPPP2P/RNBQKBNR b KQkq - 0 2",
+      "toMove": "b",
+      "solution": "Qh4#",
+      "hint": {
+        "uk": "Білі послабили діагональ до свого короля.",
+        "pl": "Białe osłabiły przekątną do własnego króla."
+      },
+      "explanation": {
+        "uk": "«Дурний мат» — найкоротший у шахах. Ферзь h4 б'є e1 через g3 і f2.",
+        "pl": "„Mat głupca” — najkrótszy mat w szachach. Hetman h4 atakuje e1 przez g3 i f2."
+      }
+    },
+    {
+      "id": "m16",
+      "difficulty": "medium",
+      "fen": "4k3/8/4K3/8/1Q6/8/8/8 w - - 0 1",
+      "toMove": "w",
+      "solution": "Qe7#",
+      "hint": {
+        "uk": "Постав ферзя впритул до короля — під захистом свого короля.",
+        "pl": "Postaw hetmana tuż obok króla — pod osłoną swojego króla."
+      },
+      "explanation": {
+        "uk": "«Поцілунок ферзя»: ферзь стоїть поруч із королем, а захищає його білий король.",
+        "pl": "„Pocałunek hetmana”: hetman stoi obok króla, a broni go biały król."
+      }
+    },
+    {
+      "id": "m17",
+      "difficulty": "medium",
+      "fen": "r4rk1/ppp2pp1/8/7Q/8/3B4/PPP2PPP/R5K1 w - - 0 1",
+      "toMove": "w",
+      "solution": "Qh7#",
+      "hint": {
+        "uk": "Слон d3 дивиться на h7.",
+        "pl": "Goniec d3 patrzy na h7."
+      },
+      "explanation": {
+        "uk": "Ферзь h7 під захистом слона d3 — класичний мат біля рокірованого короля.",
+        "pl": "Hetman h7 pod osłoną gońca d3 — klasyczny mat przy zroszowanym królu."
+      }
+    },
+    {
+      "id": "m18",
+      "difficulty": "medium",
+      "fen": "8/7p/5K1k/7p/6P1/8/8/8 w - - 0 1",
+      "toMove": "w",
+      "solution": "g5#",
+      "hint": {
+        "uk": "Мат може поставити навіть пішак!",
+        "pl": "Mata może dać nawet pionek!"
+      },
+      "explanation": {
+        "uk": "Пішак g5 дає шах, король f6 його захищає, а власні пішаки заважають чорному королю.",
+        "pl": "Pionek g5 daje szacha, król f6 go broni, a własne pionki przeszkadzają czarnemu królowi."
+      }
+    },
+    {
+      "id": "m19",
+      "difficulty": "medium",
+      "fen": "6k1/5p1p/5PpQ/8/8/8/5PPP/6K1 w - - 0 1",
+      "toMove": "w",
+      "solution": "Qg7#",
+      "hint": {
+        "uk": "Пішак f6 захищає одне дуже важливе поле.",
+        "pl": "Pionek f6 broni jednego bardzo ważnego pola."
+      },
+      "explanation": {
+        "uk": "Ферзь g7 під захистом пішака f6 — король не може його забрати.",
+        "pl": "Hetman g7 pod osłoną pionka f6 — król nie może go zbić."
+      }
+    },
+    {
+      "id": "m20",
+      "difficulty": "medium",
+      "fen": "5rk1/5pp1/8/6NQ/8/8/5PPP/6K1 w - - 0 1",
+      "toMove": "w",
+      "solution": "Qh7#",
+      "hint": {
+        "uk": "Кінь g5 захищає поле h7.",
+        "pl": "Skoczek g5 broni pola h7."
+      },
+      "explanation": {
+        "uk": "Ферзь і кінь — дружна команда: кінь захищає ферзя на h7.",
+        "pl": "Hetman i skoczek to zgrana drużyna: skoczek broni hetmana na h7."
+      }
+    },
+    {
+      "id": "m21",
+      "difficulty": "medium",
+      "fen": "6k1/5ppp/8/8/6nq/8/5PP1/5RK1 b - - 0 1",
+      "toMove": "b",
+      "solution": "Qh2#",
+      "hint": {
+        "uk": "Чорний кінь g4 захищає поле h2.",
+        "pl": "Czarny skoczek g4 broni pola h2."
+      },
+      "explanation": {
+        "uk": "Ферзь h2 під захистом коня g4 — білому королю нікуди тікати.",
+        "pl": "Hetman h2 pod osłoną skoczka g4 — biały król nie ma dokąd uciec."
+      }
+    },
+    {
+      "id": "m22",
+      "difficulty": "medium",
+      "fen": "6k1/5p1p/6p1/5N2/8/2Q5/5PPP/6K1 w - - 0 1",
+      "toMove": "w",
+      "solution": "Qg7#",
+      "hint": {
+        "uk": "Довга діагональ веде прямо до g7, а кінь f5 її захищає.",
+        "pl": "Długa przekątna prowadzi prosto do g7, a skoczek f5 jej broni."
+      },
+      "explanation": {
+        "uk": "Ферзь g7 під захистом коня f5 — мат.",
+        "pl": "Hetman g7 pod osłoną skoczka f5 — mat."
+      }
+    },
+    {
+      "id": "m23",
+      "difficulty": "medium",
+      "fen": "6k1/1b3ppp/8/6q1/8/8/5PPP/6K1 b - - 0 1",
+      "toMove": "b",
+      "solution": "Qxg2#",
+      "hint": {
+        "uk": "Слон b7 дивиться через усю дошку на g2.",
+        "pl": "Goniec b7 patrzy przez całą szachownicę na g2."
+      },
+      "explanation": {
+        "uk": "Ферзь бере g2 під захистом слона b7.",
+        "pl": "Hetman bije g2 pod osłoną gońca b7."
+      }
+    },
+    {
+      "id": "m24",
+      "difficulty": "hard",
+      "tags": [
+        "smothered"
+      ],
+      "fen": "6rk/6pp/8/6N1/8/8/6PP/6K1 w - - 0 1",
+      "toMove": "w",
+      "solution": "Nf7#",
+      "hint": {
+        "uk": "Королю заважають усі власні фігури. Хто вміє стрибати?",
+        "pl": "Królowi przeszkadzają wszystkie własne bierki. Kto umie skakać?"
+      },
+      "explanation": {
+        "uk": "«Задушений мат»: король оточений своїми фігурами, а кінь дає шах.",
+        "pl": "„Mat stłumiony”: król jest otoczony swoimi bierkami, a skoczek daje szacha."
+      }
+    },
+    {
+      "id": "m25",
+      "difficulty": "hard",
+      "tags": [
+        "smothered"
+      ],
+      "fen": "6k1/5ppp/8/8/4n3/8/6PP/6RK b - - 0 1",
+      "toMove": "b",
+      "solution": "Nf2#",
+      "hint": {
+        "uk": "Білий король замкнений у кутку. Чорний кінь — до нього!",
+        "pl": "Biały król jest zamknięty w rogu. Czarny skoczek — do niego!"
+      },
+      "explanation": {
+        "uk": "Задушений мат чорним конем: тура g1 і пішаки не дають королю ворухнутися.",
+        "pl": "Mat stłumiony czarnym skoczkiem: wieża g1 i pionki nie pozwalają królowi się ruszyć."
+      }
+    },
+    {
+      "id": "m26",
+      "difficulty": "hard",
+      "fen": "7k/R7/5N2/8/8/8/8/6K1 w - - 0 1",
+      "toMove": "w",
+      "solution": "Rh7#",
+      "hint": {
+        "uk": "Кінь f6 захищає h7 і б'є g8.",
+        "pl": "Skoczek f6 broni h7 i atakuje g8."
+      },
+      "explanation": {
+        "uk": "«Арабський мат»: тура h7 під захистом коня, кінь ще й забрав поле g8.",
+        "pl": "„Mat arabski”: wieża h7 pod osłoną skoczka, a skoczek zajął jeszcze pole g8."
+      }
+    },
+    {
+      "id": "m27",
+      "difficulty": "hard",
+      "fen": "7k/7p/8/8/8/4B3/5P1P/6RK w - - 0 1",
+      "toMove": "w",
+      "solution": "Bd4#",
+      "hint": {
+        "uk": "Тура g1 уже тримає вертикаль g. Слону лишається довга діагональ.",
+        "pl": "Wieża g1 już trzyma linię g. Gońcowi zostaje długa przekątna."
+      },
+      "explanation": {
+        "uk": "«Мат Морфі»: слон дає шах по діагоналі, тура тримає поля g7 і g8.",
+        "pl": "„Mat Morphy’ego”: goniec daje szacha po przekątnej, wieża trzyma pola g7 i g8."
+      }
+    },
+    {
+      "id": "m28",
+      "difficulty": "hard",
+      "fen": "2kr4/p2n1ppp/8/8/5B2/8/4BPPP/6K1 w - - 0 1",
+      "toMove": "w",
+      "solution": "Ba6#",
+      "hint": {
+        "uk": "Два слони схрещують діагоналі перед чорним королем.",
+        "pl": "Dwa gońce krzyżują przekątne przed czarnym królem."
+      },
+      "explanation": {
+        "uk": "«Мат Бодена»: слон a6 дає шах, слон f4 тримає b8 і c7.",
+        "pl": "„Mat Bodena”: goniec a6 daje szacha, goniec f4 trzyma b8 i c7."
+      }
+    },
+    {
+      "id": "m29",
+      "difficulty": "hard",
+      "fen": "8/4Nppk/8/3R4/8/8/5PPP/6K1 w - - 0 1",
+      "toMove": "w",
+      "solution": "Rh5#",
+      "hint": {
+        "uk": "Кінь e7 уже забрав поля g6 і g8. Тура — на вертикаль h!",
+        "pl": "Skoczek e7 już zajął pola g6 i g8. Wieża — na linię h!"
+      },
+      "explanation": {
+        "uk": "«Мат Анастасії»: кінь закриває втечі, тура б'є вертикаль h.",
+        "pl": "„Mat Anastazji”: skoczek zamyka ucieczki, wieża atakuje linię h."
+      }
+    },
+    {
+      "id": "m30",
+      "difficulty": "hard",
+      "fen": "3rkr2/pp4pp/8/8/8/1Q6/5PPP/6K1 w - - 0 1",
+      "toMove": "w",
+      "solution": "Qe6#",
+      "hint": {
+        "uk": "Чорні тури стоять обабіч короля, як погони.",
+        "pl": "Czarne wieże stoją po obu stronach króla jak epolety."
+      },
+      "explanation": {
+        "uk": "«Мат-еполет»: власні тури d8 і f8 забрали в короля поля втечі.",
+        "pl": "„Mat epoletowy”: własne wieże d8 i f8 zabrały królowi pola ucieczki."
+      }
+    },
+    {
+      "id": "m31",
+      "difficulty": "hard",
+      "tags": [
+        "smothered"
+      ],
+      "fen": "kr6/pp6/8/3N4/8/8/5PPP/6K1 w - - 0 1",
+      "toMove": "w",
+      "solution": "Nc7#",
+      "hint": {
+        "uk": "Король у кутку оточений своїми. Шукай стрибок коня.",
+        "pl": "Król w rogu jest otoczony swoimi. Szukaj skoku skoczka."
+      },
+      "explanation": {
+        "uk": "Ще один задушений мат — тепер у кутку a8.",
+        "pl": "Jeszcze jeden mat stłumiony — tym razem w rogu a8."
+      }
+    },
+    {
+      "id": "m32",
+      "difficulty": "hard",
+      "fen": "7k/6p1/8/8/2B5/R7/5PPP/6K1 w - - 0 1",
+      "toMove": "w",
+      "solution": "Rh3#",
+      "hint": {
+        "uk": "Слон c4 стереже поле g8.",
+        "pl": "Goniec c4 pilnuje pola g8."
+      },
+      "explanation": {
+        "uk": "«Мат Греко»: тура б'є вертикаль h, слон забрав g8, а пішак g7 — свій.",
+        "pl": "„Mat Greco”: wieża atakuje linię h, goniec zajął g8, a pionek g7 jest własny."
+      }
+    }
+  ]
+}

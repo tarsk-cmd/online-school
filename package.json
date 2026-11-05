@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "npm run check-puzzles && astro build",
+    "check-puzzles": "node scripts/check-puzzles.mjs",
     "preview": "astro preview",
     "check:links": "node scripts/check-links.mjs"
   },
@@ -16,6 +17,8 @@
     "@fontsource-variable/rubik": "^5.3.0",
     "@tailwindcss/vite": "^4.3.4",
     "astro": "^7.4.5",
+    "chess.js": "^1.4.0",
+    "cm-chessboard": "^8.15.4",
     "tailwindcss": "^4.3.4"
   },
   "devDependencies": {

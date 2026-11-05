@@ -1,0 +1,34 @@
+---
+/**
+ * Шаховий тренажер. Уся логіка — у app.ts (клієнтський скрипт).
+ * embed=true — версія для iframe: посилання на сайт відкриваються в новій вкладці.
+ */
+import './trainer.css';
+import { localizedPath } from '@/i18n/routes';
+
+interface Props {
+  lang?: 'uk' | 'en' | 'pl';
+  embed?: boolean;
+}
+const { lang = 'uk', embed = false } = Astro.props;
+const abs = (p: string) => new URL(localizedPath(lang, p), Astro.site).href;
+const signupUrl = embed ? abs('/contacts/?direction=chess#signup') : localizedPath(lang, '/contacts/?direction=chess#signup');
+const parentsUrl = embed ? abs('/parents/') : localizedPath(lang, '/parents/');
+---
+<div class="tr-root" data-trainer data-lang={lang} data-embed={embed ? '1' : '0'} data-signup={signupUrl} data-parents={parentsUrl}>
+  <noscript>
+    <p style="padding:1rem">{lang === 'pl' ? 'Aby grać w trenera, włącz JavaScript w przeglądarce.' : 'Щоб грати в тренажер, увімкніть JavaScript у браузері.'}</p>
+  </noscript>
+</div>
+
+<script>
+  import { mountTrainer } from './app';
+  for (const el of document.querySelectorAll<HTMLElement>('[data-trainer]')) {
+    mountTrainer(el, {
+      lang: (el.dataset.lang as 'uk') ?? 'uk',
+      embed: el.dataset.embed === '1',
+      signupUrl: el.dataset.signup ?? '/',
+      parentsUrl: el.dataset.parents ?? '/',
+    });
+  }
+</script>
