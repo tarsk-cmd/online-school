@@ -1,0 +1,26 @@
+# Перевірка pull request: шахові задачі, збірка сайту, биті посилання.
+# Якщо в src/data/puzzles/*.json є помилкова задача — перевірка стане червоною.
+name: Check
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Перевірка шахових задач
+        run: npm run check-puzzles
+      - run: npm run build
+      - name: Перевірка битих посилань
+        run: npm run check:links

@@ -12,6 +12,7 @@ import FaqList from '@/components/FaqList.astro';
 import CtaBanner from '@/components/CtaBanner.astro';
 import HeroArt from '@/components/HeroArt.astro';
 import Icon from '@/components/Icon.astro';
+import TrainerPromo from '@/components/trainer/TrainerPromo.astro';
 import home from '../../content/home.json';
 import faq from '../../content/faq.json';
 import reviews from '../../content/reviews.json';
@@ -50,6 +51,9 @@ const dirTitle = Object.fromEntries(directions.map((d) => [d.id, l(d.data.title,
       <div class="px-6 sm:px-10"><HeroArt /></div>
     </div>
   </section>
+
+  <!-- Шаховий тренажер (поки що лише українською) -->
+  {lang === 'uk' && <TrainerPromo />}
 
   <!-- Напрями -->
   <section class="section" aria-labelledby="directions">

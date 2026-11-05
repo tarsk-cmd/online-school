@@ -19,6 +19,8 @@ const items: { key: UIKey; href: string }[] = [
   { key: 'nav.blog', href: '/blog/' },
   { key: 'nav.contacts', href: '/contacts/' },
 ];
+// Шаховий тренажер поки що лише українською
+if (lang === 'uk') items.splice(1, 0, { key: 'nav.trainer', href: '/trener/' });
 const isActive = (href: string) =>
   path === href || (href === '/courses/' && path.startsWith('/directions/')) || (href !== '/' && path.startsWith(href));
 ---

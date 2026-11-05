@@ -1,0 +1,23 @@
+---
+/** Яскравий блок-запрошення до шахового тренажера (головна сторінка). */
+import { localizedPath } from '@/i18n/routes';
+import { mascotSvg } from './mascot';
+---
+<section class="section pt-4 pb-0 sm:pt-6 sm:pb-0" aria-labelledby="trainer-promo-title">
+  <div class="container-page">
+    <div class="relative overflow-hidden rounded-3xl border-4 border-sun-400 bg-gradient-to-br from-sun-200 via-white to-brand-50 p-6 shadow-sm sm:p-10">
+      <div class="grid items-center gap-6 sm:grid-cols-[auto_1fr_auto]">
+        <div class="mx-auto w-24 sm:w-32" set:html={mascotSvg} />
+        <div>
+          <p class="eyebrow">Нове · для дітей 7–12 років</p>
+          <h2 id="trainer-promo-title" class="mt-2 text-2xl font-bold sm:text-3xl">Спробуй шаховий тренажер безкоштовно</h2>
+          <p class="mt-3 text-muted">
+            Як ходять фігури, шах, втечі від шаху й мат в 1 хід — у грі зі зірочками, балами й нагородами.
+            Без реєстрації й реклами, працює на телефоні.
+          </p>
+        </div>
+        <a href={localizedPath('uk', '/trener/')} class="btn-primary text-lg">Грати ♞</a>
+      </div>
+    </div>
+  </div>
+</section>
