@@ -314,7 +314,7 @@ const pl: Partial<Record<UIKey, string>> = {
   'nav.parents': 'Dla rodziców',
   'nav.blog': 'Blog',
   'nav.contacts': 'Kontakt',
-  'nav.trainer': 'Trener szachowy',
+  'nav.trainer': 'Trener',
   'nav.menu': 'Menu',
   'nav.close': 'Zamknij menu',
   'nav.main': 'Menu główne',

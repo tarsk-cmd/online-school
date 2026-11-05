@@ -9,7 +9,7 @@ import escapeData from '@/data/puzzles/escape.json';
 import mateData from '@/data/puzzles/mate.json';
 import { buildWorld, minMoves, nextStep, pieceMoves, promoted } from './engine/pieces.mjs';
 import { Board } from './board';
-import { createT, pick, type Localized, type T, type TrainerLang } from './i18n';
+import { createT, movesWord as movesWordFor, pick, type Localized, type T, type TrainerLang } from './i18n';
 import type { TrainerKey } from './i18n/uk';
 import { clearProgress, emptyProgress, loadProgress, saveProgress, storageAvailable, type Progress } from './storage';
 import { play, setMuted } from './sound';
@@ -702,7 +702,7 @@ export class TrainerApp {
     const extra = Math.max(0, st.moves! - st.best!);
     st.extraByTask[st.index] = extra;
     this.success(extra === 0);
-    const movesWord = (n: number) => `${n} ${this.movesNoun(n)}`;
+    const movesWord = (n: number) => movesWordFor(this.cfg.lang, n, t);
     const msg = extra === 0 ? t('fb.taskDoneBest', { n: movesWord(st.best!) }) : t('fb.taskDoneMore', { n: movesWord(st.moves!), best: movesWord(st.best!) });
     this.say(msg, extra === 0 ? 'cheer' : 'happy');
     const actions = this.view.querySelector('.tr-actions')!;
@@ -711,15 +711,6 @@ export class TrainerApp {
       ${extra ? `<button type="button" class="tr-btn tr-btn-ghost" data-act="retry-task">↺ ${esc(t('task.retryTask'))}</button>` : ''}
       <button type="button" class="tr-btn tr-btn-primary" data-act="next">${esc(last ? t('task.finish') : t('task.next'))} →</button>`;
     actions.querySelector<HTMLElement>('[data-act="next"]')?.focus();
-  }
-
-  private movesNoun(n: number) {
-    // українські форми: 1 хід, 2–4 ходи, 5+ ходів
-    const m10 = n % 10;
-    const m100 = n % 100;
-    if (m10 === 1 && m100 !== 11) return 'хід';
-    if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return 'ходи';
-    return 'ходів';
   }
 
   // ---------- Режими 2–4 ----------

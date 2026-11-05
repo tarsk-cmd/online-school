@@ -52,8 +52,8 @@ const dirTitle = Object.fromEntries(directions.map((d) => [d.id, l(d.data.title,
     </div>
   </section>
 
-  <!-- Шаховий тренажер (поки що лише українською) -->
-  {lang === 'uk' && <TrainerPromo />}
+  <!-- Шаховий тренажер (українською й польською) -->
+  {(lang === 'uk' || lang === 'pl') && <TrainerPromo lang={lang} />}
 
   <!-- Напрями -->
   <section class="section" aria-labelledby="directions">

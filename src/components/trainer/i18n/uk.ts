@@ -47,6 +47,10 @@ export const uk = {
   'task.counter': 'Завдання {n} з {total}',
   'task.moves': 'Ходів: {n}',
   'task.best': 'Найкраще: {n}',
+  // форми слова «хід»: 1 хід, 2 ходи, 5 ходів
+  'moves.one': 'хід',
+  'moves.few': 'ходи',
+  'moves.many': 'ходів',
   'task.next': 'Далі',
   'task.retryTask': 'Ще раз',
   'task.finish': 'Результати',

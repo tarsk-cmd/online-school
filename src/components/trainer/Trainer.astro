@@ -17,7 +17,7 @@ const parentsUrl = embed ? abs('/parents/') : localizedPath(lang, '/parents/');
 ---
 <div class="tr-root" data-trainer data-lang={lang} data-embed={embed ? '1' : '0'} data-signup={signupUrl} data-parents={parentsUrl}>
   <noscript>
-    <p style="padding:1rem">Щоб грати в тренажер, увімкніть JavaScript у браузері.</p>
+    <p style="padding:1rem">{lang === 'pl' ? 'Aby grać w trenera, włącz JavaScript w przeglądarce.' : 'Щоб грати в тренажер, увімкніть JavaScript у браузері.'}</p>
   </noscript>
 </div>
 

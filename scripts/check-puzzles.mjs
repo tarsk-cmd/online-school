@@ -188,6 +188,23 @@ for (const level of pieces.levels) {
   if (VERBOSE) console.log(`  ${level.id}: мінімум ходів ${mins.join(', ')}`);
 }
 
+// ---------- Переклади ----------
+// Відсутній переклад — лише попередження: тренажер покаже український текст.
+const TRANSLATIONS = ['pl'];
+function findMissing(file, node, path) {
+  if (Array.isArray(node)) return node.forEach((x, i) => findMissing(file, x, `${path}[${x?.id ?? i}]`));
+  if (!node || typeof node !== 'object') return;
+  if (typeof node.uk === 'string') {
+    for (const lang of TRANSLATIONS) if (!node[lang]) warn.push(`⚠ ${file} → ${path}: немає перекладу "${lang}"`);
+    return;
+  }
+  for (const [k, v] of Object.entries(node)) findMissing(file, v, path ? `${path}.${k}` : k);
+}
+findMissing('check.json', check, '');
+findMissing('escape.json', escape, '');
+findMissing('mate.json', mate, '');
+findMissing('pieces.json', pieces, '');
+
 // ---------- Кількість ----------
 if (mate.puzzles.length < 30) err('mate.json', `задач лише ${mate.puzzles.length} (потрібно ≥ 30)`);
 if (check.puzzles.length < 15) err('check.json', `задач лише ${check.puzzles.length} (потрібно ≥ 15)`);

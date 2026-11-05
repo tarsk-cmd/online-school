@@ -1,0 +1,43 @@
+---
+/**
+ * Сторінка тренажера для вбудовування через iframe (без шапки й футера сайту).
+ * Використовується в /trener/embed/ і /pl/trener/embed/. Код вставки — у README.md.
+ */
+import '@/styles/global.css';
+import Trainer from './Trainer.astro';
+import { localizedPath } from '@/i18n/routes';
+
+interface Props { lang: 'uk' | 'pl' }
+const { lang } = Astro.props;
+const canonical = new URL(localizedPath(lang, '/trener/'), Astro.site).href;
+const meta = {
+  uk: { title: 'Шаховий тренажер — онлайн-школа «Дебют»', description: 'Шаховий тренажер для дітей від онлайн-школи «Дебют».' },
+  pl: { title: 'Trener szachowy — szkoła online „Debiut”', description: 'Trener szachowy dla dzieci od szkoły online „Debiut”.' },
+}[lang];
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{meta.title}</title>
+    <meta name="description" content={meta.description} />
+    <meta name="robots" content="noindex, follow" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href={localizedPath('uk', '/favicon.svg')} type="image/svg+xml" />
+  </head>
+  <body class="bg-paper">
+    <main>
+      <Trainer lang={lang} embed />
+    </main>
+    <script>
+      // Повідомляємо батьківській сторінці висоту, щоб iframe міг підлаштуватися (необов'язково).
+      if (window.parent !== window) {
+        const send = () =>
+          window.parent.postMessage({ type: 'debut-trainer:height', height: document.documentElement.scrollHeight }, '*');
+        new ResizeObserver(send).observe(document.body);
+        send();
+      }
+    </script>
+  </body>
+</html>
